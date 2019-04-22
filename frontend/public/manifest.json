@@ -1,0 +1,8 @@
+{
+  "short_name": "Showroom Take-Home",
+  "name": "Showroom Take-Home Assignment",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
