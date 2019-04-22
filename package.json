@@ -1,0 +1,30 @@
+{
+  "name": "showroom-take-home",
+  "version": "0.1.0",
+  "description": "Take home assignment for Showroom interview process",
+  "author": {
+    "name": "Wilson Jiang",
+    "email": "wilsonj806@gmail.com"
+  },
+  "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "dependencies": {
+
+  },
+  "scripts": {
+
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  }
+}
