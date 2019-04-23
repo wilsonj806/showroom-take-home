@@ -45,7 +45,11 @@ cd backend/database
 
 .read setup-tables.txt
 
-.read setup-entries.txt
+.read setup-unique-entries.txt
+
+.read setup-shows.txt
+
+.read setup-comments.txt
 ```
 - If SQLite isn't added to your PATH variables:
 ```
@@ -59,5 +63,9 @@ cd backend/database
 
 .read setup-tables.txt
 
-.read setup-entries.txt
+.read setup-unique-entries.txt
+
+.read setup-shows.txt
+
+.read setup-comments.txt
 ```

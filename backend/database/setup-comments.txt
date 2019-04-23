@@ -1,0 +1,4 @@
+INSERT INTO comments(user_id, show_id, comment_body) VALUES
+(1, 1, "Wow, this show's a classic"),
+(3, 2, "I can't believe the show's ending!"),
+(2, 3, "When's the next season coming out!?!?!?!?");

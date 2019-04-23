@@ -1,0 +1,6 @@
+INSERT INTO shows(user_id, genres_id, title, img_url) VALUES
+  (1, 2, "Avatar The Last Airbender", "https://images-na.ssl-images-amazon.com/images/I/51uTi%2Bt0U9L._SX373_BO1,204,203,200_.jpg"),
+  (3, 4, "Game Of Thrones", "https://s3.amazonaws.com/sbstatesman/wp-content/uploads/2019/04/17195815/game-of-thrones.jpg"),
+  (2, 3, "Sherlock", "https://images-na.ssl-images-amazon.com/images/I/51j90UOkX-L._SY445_.jpg"),
+  (2, 2, "Mob Psycho 100", "https://images-na.ssl-images-amazon.com/images/I/91cpcyfu4zL._SL1500_.jpg"),
+  (4, 1, "Star Trek: The Next Generation", "https://m.media-amazon.com/images/M/MV5BNDViYjAyZWUtNGQxMy00MDUyLTlkZTAtOWNkY2M5ZTk5MTE5XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_.jpg");

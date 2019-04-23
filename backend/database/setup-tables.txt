@@ -1,0 +1,29 @@
+CREATE TABLE IF NOT EXISTS users(
+  id INTEGER NOT NULL,
+  username UNIQUE NOT NULL,
+  PRIMARY KEY(id)
+);
+CREATE TABLE IF NOT EXISTS genres(
+  id INTEGER NOT NULL,
+  genre_name UNIQUE NOT NULL,
+  PRIMARY KEY(id)
+);
+CREATE TABLE IF NOT EXISTS shows(
+  id INTEGER NOT NULL,
+  user_id INTEGER,
+  genres_id INTEGER,
+  title NOT NULL,
+  img_url NOT NULL,
+  PRIMARY KEY(id),
+  FOREIGN KEY(user_id) REFERENCES users(id),
+  FOREIGN KEY(genres_id) REFERENCES genres(id)
+);
+CREATE TABLE IF NOT EXISTS comments(
+  id INTEGER NOT NULL,
+  user_id INTEGER,
+  show_id INTEGER,
+  comment_body TEXT,
+  PRIMARY KEY(id),
+  FOREIGN KEY(user_id) REFERENCES users(id),
+  FOREIGN KEY(show_id) REFERENCES shows(id)
+);

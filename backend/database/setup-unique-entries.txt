@@ -1,0 +1,14 @@
+INSERT INTO users(username) VALUES
+  ("johnDoe123"),
+  ("janeSmith123"),
+  ("shibaOwner123"),
+  ("catsAreCool");
+
+INSERT INTO genres(genre_name) VALUES
+  ("science-fiction"),
+  ("animation"),
+  ("mystery"),
+  ("fantasy"),
+  ("non-fiction"),
+  ("drama"),
+  ("comedy");
