@@ -13,7 +13,14 @@
     "url": ""
   },
   "dependencies": {
-
+    "body-parser": "^1.17.2",
+    "connect-flash": "^0.1.1",
+    "express": "^4.15.3",
+    "express-messages": "^1.0.1",
+    "express-session": "^1.15.3",
+    "express-validator": "^5.3.1",
+    "concurrently": "^3.6.0",
+    "sequelize": "^5.7.4"
   },
   "scripts": {
 

@@ -26,7 +26,7 @@ TV Show Watchlist will be a full-stack application where users can post, comment
 ### Database Structure
 
 The following tables and columns will be necessary.
-Make sure to prepopulate your database with data. We will be evaluating your code application, so make sure there are data inserted.
+**Make sure to prepopulate your database with data**. We will be evaluating your code application, so make sure there are data inserted.
 
 - **Users**
   - id
