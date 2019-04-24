@@ -5,10 +5,16 @@
 
 const express = require('express');
 const sequelize = require('./models/Sequelize');
-const User = require('./models/user');
-const Genre = require('./models/genre');
-const Comment = require('./models/comment');
-const Show = require('./models/show');
+const bodyParser = require('body-parser');
+
+// Import Routes
+const routeUsers = require('./routes/users');
+const routeGenres = require('./routes/genres');
+
+const PORT = process.env.PORT || 5000;
+
+const app = express();
+
 /**
  * Connect to local database
  */
@@ -22,10 +28,20 @@ sequelize
     console.error('Unable to connect to the database:', err);
   });
 
+// Use Body Parser middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+
+app.use('/users', routeUsers);
+app.use('/genres', routeGenres);
+
+
+app.listen(PORT, () => console.log(`Server started on port: ${PORT}`));
+
 /**
  * Primative testing of Database Model
  */
-
+/*
 console.log('Testing Models');
 
 User.findAll({attributes: ["username"]}).then(
@@ -50,4 +66,4 @@ Show.findAll({attributes: ["title"]}).then(
   shows => {
     const map = shows.map(show => show.dataValues.title);
     console.log(map);
-});
+}); */
