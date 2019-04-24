@@ -56,3 +56,11 @@ Final routes will probably look like the below with all requests included:
     - said `GET` request **MUST** return:
       - `user_id` of **ALL** users who are currently watching
         - should also present a link to each user's profile
+- `/show/:id` Profile for a single show
+  - `GET` show that matchinges the `:id` param
+    - said request **MUST** return:
+      - `title`
+      - `genre_name` attached to the `genres_id` value
+      - `img_url`
+  - `GET` all comments for that show
+  - `POST` new comment for the show

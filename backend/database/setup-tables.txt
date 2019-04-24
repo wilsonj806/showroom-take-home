@@ -11,12 +11,12 @@ CREATE TABLE IF NOT EXISTS genres(
 CREATE TABLE IF NOT EXISTS shows(
   id INTEGER NOT NULL,
   user_id INTEGER,
-  genres_id INTEGER,
+  genre_id INTEGER,
   title NOT NULL,
   img_url NOT NULL,
   PRIMARY KEY(id),
   FOREIGN KEY(user_id) REFERENCES users(id),
-  FOREIGN KEY(genres_id) REFERENCES genres(id)
+  FOREIGN KEY(genre_id) REFERENCES genres(id)
 );
 CREATE TABLE IF NOT EXISTS comments(
   id INTEGER NOT NULL,
