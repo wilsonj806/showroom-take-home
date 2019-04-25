@@ -28,6 +28,7 @@ router.get('/single/:id', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const queryUsers = await User.findAll();
+    console.log(queryUsers);
     const users = queryUsers.map(user => {
       return {
         id: user.dataValues.id,
@@ -43,8 +44,30 @@ router.get('/', async (req, res) => {
 /**
  * POST new user
  */
-router.post('/single', (req, res) => {
-
+router.post('/add', async (req, res) => {
+  // TODO: make sure this can accept form data
+  const { username } = req.body;
+  try {
+    const queryUsers = await User.findAll({
+      where: {
+        username: username
+      }
+    });
+    if(queryUsers.length === 0) {
+      await User.create({ username: username });
+        /**
+         * TODO: change this to a flash message
+         * TODO: add proper 201 response headers if possible
+         */
+      console.log("Registration success");
+      res.status(200).send();
+    } else {
+      // TODO flesh this out more
+      res.status(409).send();
+    }
+  } catch(error) {
+    res.status(500).send();
+  }
 });
 
 module.exports = router;
