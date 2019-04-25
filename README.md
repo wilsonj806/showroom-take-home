@@ -10,9 +10,12 @@ Some noteworthy requirements from the above:
 
 ## Installation And Usage
 
+### Quick Setup
+
 You'll need the following to run everything on this:
 - [Node](https://nodejs.org/en/)
-- [**Optional:** Git](https://git-scm.com/)
+- [Git](https://git-scm.com/)
+- [SQLite](https://www.sqlite.org/download.html)
 
 The database for the assignment is located in `./backend/database` and is called `database.db`
 - it runs on SQLite(https://www.sqlite.org/index.html)
@@ -34,12 +37,16 @@ To install the packages you'll need use the following:
   ```
 This will install the packages required in **both** the root directory and by the `./frontend` directory
 
-If the `./backend/database/database.db` file is unreadable or missing, you'll need to make a new `database.db` file in to replace it. Once that's done, you can run either of the following to populate the database:
+### Missing Database?
+
+If the `./backend/database/database.db` file is unreadable by SQLite or missing, you'll need to make a new `database.db` file in to replace it.
+
+Once that's done, you can run either of the following to populate the database:
 - If SQLite is added to your PATH variables:
 ```
-cd <project-directory>
+cd <project-directory-here>
 
-sqlite3 <project-directory/backend/database/database.db>
+sqlite3 backend/database/database.db
 
 cd backend/database
 
@@ -53,11 +60,11 @@ cd backend/database
 ```
 - If SQLite isn't added to your PATH variables:
 ```
-cd <directory-of-SQLite>
+cd <directory-of-SQLite-here>
 
 sqlite3 <project-directory/backend/database/database.db>
 
-cd <project-directory>
+cd <project-directory-here>
 
 cd backend/database
 
