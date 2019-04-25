@@ -14,7 +14,8 @@ Some noteworthy requirements from the above:
 
 You'll need the following to run everything on this:
 - [Node](https://nodejs.org/en/)
-- [**Optional:** Git](https://git-scm.com/)
+- [Git](https://git-scm.com/)
+- [SQLite](https://www.sqlite.org/download.html)
 
 The database for the assignment is located in `./backend/database` and is called `database.db`
 - it runs on SQLite(https://www.sqlite.org/index.html)
@@ -35,8 +36,6 @@ To install the packages you'll need use the following:
   npm install
   ```
 This will install the packages required in **both** the root directory and by the `./frontend` directory
-
-
 
 ### Missing Database?
 
