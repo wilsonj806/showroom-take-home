@@ -10,6 +10,7 @@ const bodyParser = require('body-parser');
 // Import Routes
 const routeUsers = require('./routes/users');
 const routeGenres = require('./routes/genres');
+const routeShows = require('./routes/shows');
 
 const PORT = process.env.PORT || 5000;
 
@@ -34,6 +35,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 app.use('/users', routeUsers);
 app.use('/genres', routeGenres);
+app.use('/shows', routeShows);
 
 
 app.listen(PORT, () => console.log(`Server started on port: ${PORT}`));

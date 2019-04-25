@@ -11,7 +11,7 @@ router.get('/single/:id', async (req, res) => {
     console.log(req.params);
     const queryUsers = await User.findOne({
       where: {
-        username: req.params.id
+        id: req.params.id
       }
     });
     // TODO: Add thing in to return something if no user can be found

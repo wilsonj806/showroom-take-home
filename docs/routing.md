@@ -51,12 +51,12 @@ Final routes will probably look like the below with all requests included:
       - `genre_id` selected from a drop down of all genres
       - `title` is a text input
       - `img_url` is a text input
-- `/shows` Master list of shows
+- `/shows` Master list of distinct shows
   - `GET` all shows, ignoring any repeats
     - said `GET` request **MUST** return:
       - `user_id` of **ALL** users who are currently watching
         - should also present a link to each user's profile
-- `/show/:id` Profile for a single show
+- `/show/:id` Profile for a single show in a user's currently watching list
   - `GET` show that matchinges the `:id` param
     - said request **MUST** return:
       - `title`
