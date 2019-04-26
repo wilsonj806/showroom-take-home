@@ -4,19 +4,40 @@
  * ======================================================
  * Requests handled:
  * `/user/post` : POST new show for logged in user
+ * `/user/post` : GET genres
  * `/user/:id`  : GET single user information
  *
  * Status:
- * `user/post` : done
- * `user/:id`  : done
+ * `/user/post` : done
+ * `/user/:id`  : done
  */
 const express = require('express');
 const Show = require('../models/show');
 const User = require('../models/user');
+const Genre = require('../models/genre');
 
 const { body, validationResult } = require('express-validator/check');
 
 const router = express.Router();
+
+/**
+ * GET all genres
+ *  this is for filling out the form
+ */
+router.get('/post', async (req, res) => {
+  try {
+    const queryGenres = await Genre.findAll();
+    const genres = queryGenres.map(genre => {
+      return {
+        id: genre.dataValues.id,
+        genre_name: genre.dataValues.genre_name
+      }});
+    res.json({genres: genres});
+  } catch(error) {
+    console.log(error);
+    res.status(500).send();
+  }
+});
 
 /**
  * GET single user
@@ -28,9 +49,13 @@ router.get('/:id', async (req, res) => {
         id: req.params.id
       }
     });
-    // TODO: Add thing in to return something if no user can be found
-    const singleUser = queryUsers.dataValues;
-    res.json({users: singleUser});
+    if(queryUsers == null || queryUsers.length === 0) {
+      // TODO flesh this out more
+      res.status(404).send();
+    } else {
+      const singleUser = queryUsers.dataValues;
+      res.json({users: singleUser});
+    }
   } catch(error) {
     res.status(500).send();
   }
