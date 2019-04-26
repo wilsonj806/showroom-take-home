@@ -1,17 +1,21 @@
 /**
  * Express based server
  *
- */
+ * TODO
+ *  add additional validation if needed
+ *  add messages/ responses that the UI will render if there are errors
+ *  check if SQL queries can be turned into whatever types of JOINs there are
 
+ */
 const express = require('express');
 const sequelize = require('./models/Sequelize');
 const bodyParser = require('body-parser');
 
 // Import Routes
 const routeUsers = require('./routes/users');
-const routeGenres = require('./routes/genres');
+const routeSingleUser = require('./routes/singleUser');
+const routeSingleShow = require('./routes/singleShow');
 const routeShows = require('./routes/shows');
-const routeComments = require('./routes/comments');
 
 const PORT = process.env.PORT || 5000;
 
@@ -34,10 +38,10 @@ sequelize
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use('/users', routeUsers);
-app.use('/genres', routeGenres);
+app.use('/show', routeSingleShow);
 app.use('/shows', routeShows);
-app.use('/comments', routeComments);
+app.use('/user', routeSingleUser);
+app.use('/users', routeUsers);
 
 
 app.listen(PORT, () => console.log(`Server started on port: ${PORT}`));

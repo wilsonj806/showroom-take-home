@@ -1,26 +1,19 @@
+/**
+ * Route for the list of users
+ * ======================================================
+ * ======================================================
+ * Requests handled:
+ * `/users`           : GET all users
+ * `/users/register`  : POST new user
+ *
+ * Status:
+ * `/users/`         : done
+ * `/users/register` : done
+ */
 const express = require('express');
 const User = require('../models/user');
 
 const router = express.Router();
-
-/**
- * GET single user
- */
-router.get('/single/:id', async (req, res) => {
-  try {
-    console.log(req.params);
-    const queryUsers = await User.findOne({
-      where: {
-        id: req.params.id
-      }
-    });
-    // TODO: Add thing in to return something if no user can be found
-    const singleUser = queryUsers.dataValues;
-    res.json({users: singleUser});
-  } catch(error) {
-    res.status(500).send();
-  }
-});
 
 /**
  * GET all users
@@ -28,7 +21,6 @@ router.get('/single/:id', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const queryUsers = await User.findAll();
-    console.log(queryUsers);
     const users = queryUsers.map(user => {
       return {
         id: user.dataValues.id,
@@ -40,11 +32,10 @@ router.get('/', async (req, res) => {
   }
 });
 
-
 /**
  * POST new user
  */
-router.post('/add', async (req, res) => {
+router.post('/register', async (req, res) => {
   // TODO: make sure this can accept form data
   const { username } = req.body;
   try {

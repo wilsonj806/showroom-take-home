@@ -1,123 +1,88 @@
+/**
+ * Route for the list of shows
+ * ======================================================
+ * ======================================================
+ * Requests handled:
+ * `/shows`           : GET all DISTINCT shows
+ * `/shows`           : GET all users
+ * `/shows/genre/:id` : GET all shows for a specific genre_id
+ * `/shows/user/:id`  : GET all shows for a specific user_id
+ *
+ * Status:
+ * `/shows`           : done
+ * `/shows/genre/:id` : done
+ * `/shows/user/:id`  : done
+ */
 const express = require('express');
-const Show = require('../models/show');
+const middleware = require('./middleware/showsMiddleware');
 
-const { body, validationResult } = require('express-validator/check');
+const Show = require('../models/show');
 
 const router = express.Router();
 
 /**
- * GET single show for a single user
+ * Middleware functions
  */
-router.get('/single/:id', async (req, res) => {
-  try {
-    const queryShows = await Show.findOne({
-      where: {
-        id: req.params.id
-      }
-    });
-    // TODO: Add thing in to return something if no user can be found
-    const singleShow = queryShows.dataValues;
-    res.json({show: singleShow});
-  } catch(error) {
-    res.status(500).send();
-  }
-});
+const { getAllShowsAndSort, getUsers } = middleware;
 
-/**
- * GET all shows for all users
- */
-router.get('/', async (req, res) => {
-  try {
-    const queryShows = await Show.findAll();
-    const shows = queryShows.map(show => {
-      return {
-        id: show.dataValues.id,
-        title: show.dataValues.title,
-        img: show.dataValues.img_url,
-        genres_id: show.dataValues.genres_id,
-        user_id: show.dataValues.user_id
-      }});
-    res.json({shows: shows});
-  } catch(error) {
-    res.status(500).send();
-  }
-});
 
 /**
  * GET all DISTINCT shows
  */
-router.get('/unique', async (req, res) => {
-  try {
-    const queryShows = await Show.findAll();
+router.get('/', getAllShowsAndSort, getUsers);
 
-    const reduced = queryShows.reduce((acc, show, i) => {
-      const { id, title, img_url, genre_id, user_id } = show.dataValues;
-      const showObj = {
+/**
+ * GET all shows for a user
+ */
+router.get('/user/:id', async (req, res, next) => {
+  const queryShows = await Show.findAll({
+    where: {
+      user_id: req.params.id
+    }
+  });
+  if(queryUsers == null || queryUsers.length === 0) {
+    // TODO flesh this out more
+    res.status(404).send();
+  } else {
+    const shows = queryShows.map(show => {
+      const { id, title, img_url, genre_id } = show.dataValues
+      return {
+        id: id,
         title: title,
-        ids: [],
         img_url: img_url,
-        genre_id: genre_id,
-        users_watching: []
-      };
-
-      const showExists = acc.some((accShow, j) =>{
-        return accShow.title === title;
-      });
-
-      if (showExists === true && acc.length !== 0) {
-        const indexExisting = acc.findIndex((accShow) =>{
-            return accShow.title === title;
-        });
-        acc[indexExisting].users_watching.push(user_id);
-        acc[indexExisting].ids.push(id);
-        return acc;
-      } else {
-        showObj.users_watching.push(user_id);
-        showObj.ids.push(id);
-        acc.push(showObj);
-        return acc;
+        genre_id: genre_id
       }
-      }, []);
-    res.json({unique_shows: reduced});
-  } catch(error) {
-    res.status(500).send();
+    });
+    res.json({shows: shows});
   }
 });
 
 /**
- * POST new show that a user is watching
+ * GET all shows for a genre and for all users
  */
-router.post('/add', [
-  body('title', 'Title must not be empty').exists({checkFalsy: true}),
-  body('img_url', 'Image URL must not be empty').exists({checkFalsy: true}),
-  body('genre_id', 'Genre must not be empty').exists({checkFalsy: true}),
-], async (req, res) => {
-  /**
-   * NOTE: user_id should be surmised from hidden form inputs
-   * TODO: make sure this can accept form data
-   * TODO: add validation to make sure that an entry for that show doesn't exist already
-   */
-  let errors = validationResult(req);
-  const { user_id, genre_id, title, img_url  } = req.body;
-  try {
-    if (!errors.isEmpty()) {
-      res.status(400).json({
-        errors: errors.mapped()
-      }).send();
-    } else {
-      await Show.create({
-        user_id: user_id,
-        genre_id: genre_id,
+router.get('/genre/:id', async (req, res, next) => {
+  //  attributes: [Sequelize.fn('DISTINCT', Sequelize.col('title')) ,'title'],
+  const queryShows = await Show.findAll({
+    where: {
+      genre_id: req.params.id
+    }
+  });
+  if(queryShows == null || queryShows.length === 0) {
+    // TODO flesh this out more
+    res.status(404).send();
+  } else {
+    const shows = queryShows.map(show => {
+      const { id, title, img_url } = show.dataValues
+      return {
+        id: id,
         title: title,
         img_url: img_url
-      });
-      res.status(200).json({
-        msg: `Success, show added. ${title} added to the profile of user with id: ${user_id}`,
-      }).send();
-    }
-  } catch(error) {
-    console.log(error);
-    res.status(500).send();
+      }
+    });
+    res.json({
+      genre_id: req.params.id,
+      shows: shows
+    });
   }
 });
 
