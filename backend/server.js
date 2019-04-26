@@ -9,7 +9,8 @@ const bodyParser = require('body-parser');
 
 // Import Routes
 const routeUsers = require('./routes/users');
-const routeGenres = require('./routes/genres');
+const routeSingleUser = require('./routes/singleUser');
+const routeSingleShow = require('./routes/singleShow');
 const routeShows = require('./routes/shows');
 const routeComments = require('./routes/comments');
 
@@ -34,10 +35,10 @@ sequelize
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use('/users', routeUsers);
-app.use('/genres', routeGenres);
+app.use('/show', routeSingleShow);
 app.use('/shows', routeShows);
-app.use('/comments', routeComments);
+app.use('/user', routeSingleUser);
+app.use('/users', routeUsers);
 
 
 app.listen(PORT, () => console.log(`Server started on port: ${PORT}`));
