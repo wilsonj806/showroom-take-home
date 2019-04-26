@@ -25,6 +25,7 @@ const router = express.Router();
  */
 const { getAllShowsAndSort, getUsers } = middleware;
 
+
 /**
  * GET all DISTINCT shows
  */

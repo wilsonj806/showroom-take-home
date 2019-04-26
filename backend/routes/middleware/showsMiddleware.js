@@ -1,7 +1,6 @@
 const Show = require('../../models/show');
 const User = require('../../models/user');
-const Comment = require('../../models/comment');
-const Genre = require('../../models/genre');
+
 
 const getAllShowsAndSort = async (req, res, next) => {
   // TODO: shrink this down if possible

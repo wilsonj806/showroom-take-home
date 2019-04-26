@@ -1,8 +1,12 @@
 /**
  * Express based server
  *
- */
+ * TODO
+ *  add additional validation if needed
+ *  add messages/ responses that the UI will render if there are errors
+ *  check if SQL queries can be turned into whatever types of JOINs there are
 
+ */
 const express = require('express');
 const sequelize = require('./models/Sequelize');
 const bodyParser = require('body-parser');
@@ -12,7 +16,6 @@ const routeUsers = require('./routes/users');
 const routeSingleUser = require('./routes/singleUser');
 const routeSingleShow = require('./routes/singleShow');
 const routeShows = require('./routes/shows');
-const routeComments = require('./routes/comments');
 
 const PORT = process.env.PORT || 5000;
 
