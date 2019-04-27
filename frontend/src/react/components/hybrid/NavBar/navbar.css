@@ -1,0 +1,16 @@
+.nav {
+  width: 100vw;
+}
+
+.nav__heading {
+  font-size: 1.25rem;
+}
+
+.nav__list {
+  list-style: none;
+}
+
+.nav__item {
+  display: inline-block;
+  margin: 0 0.25rem;
+}

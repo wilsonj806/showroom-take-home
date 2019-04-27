@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './list.css';
+
 const ListItem = (props) => {
   const { className, children } = props
   return (

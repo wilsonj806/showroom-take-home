@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './list.css';
 import { ListItem } from './ListItem';
 
 const List = (props) => {
@@ -28,15 +29,8 @@ const List = (props) => {
   }
 }
 
-List.propTypes = {
-  className: PropTypes.string,
-  children: PropTypes.node.isRequired,
-  listItemClass: PropTypes.string,
-  listType: PropTypes.oneOf(['ol', 'ul']),
-};
-
 const mapToListItem = (children, listItemClass = 'list__item') => {
-  if (!children instanceof Array) {
+  if (children instanceof Array) {
     const map = children.map((child) => (
       <ListItem className={listItemClass}>{child}</ListItem>
     ));
@@ -45,5 +39,12 @@ const mapToListItem = (children, listItemClass = 'list__item') => {
     return <ListItem className={listItemClass}>{children}</ListItem>
   }
 }
+
+List.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.node.isRequired,
+  listItemClass: PropTypes.string,
+  listType: PropTypes.oneOf(['ol', 'ul']),
+};
 
 export { List }
