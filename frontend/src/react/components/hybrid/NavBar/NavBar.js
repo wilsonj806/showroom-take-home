@@ -29,7 +29,7 @@ const NavBar = (props) => {
 
 NavBar.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.arrayOf(PropTypes.element.isRequired),
   navClass: PropTypes.string,
   listClass: PropTypes.string,
   listItemClass: PropTypes.string,

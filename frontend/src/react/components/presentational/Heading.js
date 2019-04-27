@@ -36,7 +36,6 @@ const Heading = (props) => {
 Heading.propTypes = {
   className: PropTypes.string,
   innerText: PropTypes.string.isRequired,
-  onClickFn: PropTypes.func.isRequired,
 };
 
 export { Heading }

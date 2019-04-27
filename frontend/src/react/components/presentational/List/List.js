@@ -31,8 +31,8 @@ const List = (props) => {
 
 const mapToListItem = (children, listItemClass = 'list__item') => {
   if (children instanceof Array) {
-    const map = children.map((child) => (
-      <ListItem className={listItemClass}>{child}</ListItem>
+    const map = children.map((child, i) => (
+      <ListItem className={listItemClass} key={i}>{child}</ListItem>
     ));
     return map;
   } else {
