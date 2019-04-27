@@ -1,29 +1,42 @@
 # State Management
 
-## State for database calls
 
-This is an example store for all calls to the database.
+## State with React
 
-```js
-  const exampleStore = {
-    users: [],
-    showsWatching: [],
-    genres: [],
-  };
-```
+Chances are, there's no time to get state running with Redux and the application is simple enough that the complexity imposed by Redux isn't worth it. We need to keep some of the following:
+- list of users
+- list of shows
+- list of genres
+- list of comments
+- the user we're currently logged in as
+- whether or not we're currently making a HTTP request
+- whether or not our lists are up to date
+- the table that isn't up to date
+- current page
+- server messages if any
 
-## State for the UI
+State shape for use with React:
+```ts
+// cheating with TypeScript syntax
+type TABLES = 'USERS' | 'COMMENTS' | 'SHOWS' | null;
 
-State for the UI looks something like this:
+type PAGES = 'SHOWS_LIST' | 'SHOW_PROFILE' | 'USER_PROFILE' | 'USERS_LIST'| 'POST_NEW_USER' | 'POST_NEW_SHOW' | 'HOME'
 
-```js
-// NOTE: orderBy is bonus
-  const orderBy = {
-    ALPHABETICAL_ASCENDING: "ALPHABETICAL_ASCENDING",
-    ALPHABETICAL_DESCENDING: "ALPHABETICAL_DESCENDING"
-  }
-  const exampleStore = {
-    loggedInAs: "",
-    orderBy: orderBy.ALPHABETICAL_ASCENDING
-  }
+interface ServerMessage {
+  msg: string,
+  requestedResource: string
+}
+
+type initialState = {
+  users: [],
+  shows: [],
+  genres: [],
+  comments: [],
+  loggedInAs: number,
+  isMakingRequest: boolean,
+  isUpToDate: boolean,
+  tablesNotUpToDate: TABLES
+  currentPage: PAGES,
+  serverMessage: Array<ServerMessage> | null
+}
 ```
