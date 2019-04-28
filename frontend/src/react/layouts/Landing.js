@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { List, Heading, Img, Paragraph, Button } from '../components/component.lib';
+import { List, Heading, Img, Paragraph, Button, Card } from '../components/component.lib';
 
+import './layouts.css';
+// TODO: maybe add a user and show count
 
 class Landing extends Component {
   componentDidMount = () => {
@@ -8,24 +10,41 @@ class Landing extends Component {
   }
 
   render = () => {
-    const { fetchUsersFn } = this.props;
+    const text = 'Welcome to the TV Show WatchList App!';
     return(
       <section
-        className=''
+        className='landing'
       >
-        <Heading
-          className=''
-          headingType={1}
-          innerText='Hello there!'
-        />
-        <Button
-          className='btn btn-primary'
-          onClickFn={fetchUsersFn}
-          innerText='Fetch stuff'
-        />
+        <Card
+          className='card'
+          style={style}
+        >
+          <Heading
+            className=''
+            headingType={1}
+            innerText='Welcome!'
+          />
+          <Paragraph
+            className="lead"
+          >
+            {`
+              ${text}
+            `}
+          </Paragraph>
+          <Button
+            className='btn btn-primary'
+            onClickFn={()=>console.log('hi')}
+            innerText='Fetch stuff'
+          />
+        </Card>
       </section>
     )
   }
+}
+
+const style = {
+  width: '33vw',
+  height: '20rem'
 }
 
 export { Landing }

@@ -47,7 +47,6 @@ export class App extends Component {
   };
 
   render = () => {
-    const newFn = this.bindFn(fetchUsersList);
     // Use Context API to pass fetch functions into children?
     // we can also pass in props into the Route components
     // pass dispatch functions into children to make calls to update state?
@@ -78,15 +77,20 @@ export class App extends Component {
             Shows
           </NavLink>
         </NavBar>
-        <section>
+        <div className='route-ctr'>
           <Route exact path="/" render={(props) => (
             <Landing
               {...props}
-              fetchUsersFn={newFn}
             />
           )} />
-          <Route path="/users" component={Users} />
-        </section>
+          <Route path="/users" render={(props) => (
+            <Users
+              {...props}
+              usersList={this.state.users}
+              fetchUsersFn={this.bindFn(fetchUsersList)}
+            />
+          )} />
+        </div>
       </>
     )
   }
