@@ -35,6 +35,7 @@ const Heading = (props) => {
 
 Heading.propTypes = {
   className: PropTypes.string,
+  headingType: PropTypes.oneOf([1,2,3,4,5,6]),
   innerText: PropTypes.string.isRequired,
 };
 

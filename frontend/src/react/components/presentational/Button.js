@@ -6,7 +6,7 @@ const Button = (props) => {
   return (
     <button
       className={className}
-      children={innerText}
+      innerText={innerText}
       onClick={onClickFn}
     />
   )
