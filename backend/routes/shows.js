@@ -41,8 +41,10 @@ router.get('/user/:id', async (req, res, next) => {
     }
   });
   if(queryUsers == null || queryUsers.length === 0) {
-    // TODO flesh this out more
-    res.status(404).send();
+    res.status(404).json({
+      status: 404,
+      msg: `Error, user with id: ${req.params.id} not found`
+    }).send();
   } else {
     const shows = queryShows.map(show => {
       const { id, title, img_url, genre_id } = show.dataValues
