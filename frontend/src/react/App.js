@@ -6,9 +6,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { List, NavBar, Button } from './components/component.lib';
 import { Landing } from './layouts/Landing';
 import { Users } from './layouts/Users';
+import { Shows } from './layouts/Shows';
 import { Login } from './layouts/Login';
 
 import { fetchUsersList, queryLogin } from '../stateFn/stateUsers';
+import { fetchShowsList } from '../stateFn/stateShows';
 
 const initialState = {
   users: [],
@@ -23,22 +25,6 @@ const initialState = {
   currentPage: 'HOME',
   serverMessage: null,
 }
-/*
-const asyncDispatch = async () => {
-  this.setState((prevState) => Object.assign({}, prevState, {isMakingRequest: !prevState.isMakingRequest}));
-  try {
-    const request = fetch('localhost', 'GET');
-    const json = request.clone().json();
-    this.setState((prevState) => Object.assign({}, prevState, {isMakingRequest: !prevState.isMakingRequest}));
-    return json.users;
-  } catch(err) {
-    this.setState((prevState) => Object.assign({}, prevState, {
-      isMakingRequest: !prevState.isMakingRequest,
-      serverMessage: err
-    }));
-  }
-}
-*/
 
 export class App extends Component {
   constructor(props) {
@@ -51,9 +37,6 @@ export class App extends Component {
   };
 
   render = () => {
-    // Use Context API to pass fetch functions into children?
-    // we can also pass in props into the Route components
-    // pass dispatch functions into children to make calls to update state?
     const { isLoggedIn, loggedInAs } = this.state
     return(
       <>
@@ -68,6 +51,7 @@ export class App extends Component {
           <Route exact path="/" render={(props) => (
             <Landing
               {...props}
+              loggedInAs={isLoggedIn === true ? loggedInAs : null}
             />
           )} />
           <Route path="/users" exact render={(props) => (
@@ -75,6 +59,13 @@ export class App extends Component {
               {...props}
               usersList={this.state.users}
               fetchUsersFn={this.bindFn(fetchUsersList)}
+            />
+          )} />
+          <Route path="/shows" exact render={(props) => (
+            <Shows
+              {...props}
+              showsList={this.state.shows}
+              fetchShowsFn={this.bindFn(fetchShowsList)}
             />
           )} />
           <Route path="/users/login" component={(props) => (

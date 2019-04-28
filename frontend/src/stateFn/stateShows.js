@@ -1,7 +1,7 @@
 // NOTE if this is supposed to imitate Redux, it'd be better to have a method in <App/> to call this.setState instead
-const endpoint = 'http://localhost:5000/users';
+const endpoint = 'http://localhost:5000/shows';
 
-async function fetchUsersList() {
+async function fetchShowsList() {
   console.log(this);
   this.setState((prevState)=> {
     return Object.assign({}, prevState, {
@@ -15,7 +15,7 @@ async function fetchUsersList() {
     this.setState((prevState)=> {
       return Object.assign({}, prevState, {
         isUpToDate: !prevState.isUpToDate,
-        users: data.users
+        shows: data.shows
       });
     });
   } catch(error) {
@@ -28,26 +28,6 @@ async function fetchUsersList() {
   });
 }
 
-async function queryLogin(username) {
-  const init = {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({username: username}),
-  }
-  const dbCall = await fetch(endpoint + '/login', init);
-  const response = await dbCall.clone().json();
-  // todo add flash message
-  console.log(response);
-  this.setState({
-    isLoggedIn: true,
-    loggedInAs: username
-  });
-}
-
 export {
-  fetchUsersList,
-  queryLogin
+  fetchShowsList,
 }

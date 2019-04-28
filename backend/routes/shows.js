@@ -61,6 +61,8 @@ router.get('/user/:id', async (req, res, next) => {
 
 /**
  * GET all shows for a genre and for all users
+ *
+ * TODO: Make this a custom Sequelize query
  */
 router.get('/genre/:id', async (req, res, next) => {
   //  attributes: [Sequelize.fn('DISTINCT', Sequelize.col('title')) ,'title'],
