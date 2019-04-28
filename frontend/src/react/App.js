@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, NavLink } from 'react-router-dom';
+import { Route, NavLink } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
 import { List, NavBar, Button } from './components/component.lib';
+import { Landing } from './layouts/Landing';
+import { Users } from './layouts/Users';
+
+import { fetchUsersList } from '../stateFn/stateUsers';
 
 const initialState = {
   users: [],
@@ -16,15 +20,39 @@ const initialState = {
   currentPage: 'HOME',
   serverMessage: null,
 }
+/*
+const asyncDispatch = async () => {
+  this.setState((prevState) => Object.assign({}, prevState, {isMakingRequest: !prevState.isMakingRequest}));
+  try {
+    const request = fetch('localhost', 'GET');
+    const json = request.clone().json();
+    this.setState((prevState) => Object.assign({}, prevState, {isMakingRequest: !prevState.isMakingRequest}));
+    return json.users;
+  } catch(err) {
+    this.setState((prevState) => Object.assign({}, prevState, {
+      isMakingRequest: !prevState.isMakingRequest,
+      serverMessage: err
+    }));
+  }
+}
+*/
 export class App extends Component {
   constructor(props) {
     super(props);
     this.state = initialState;
   }
+  bindFn = (inputFn) => {
+    if(typeof inputFn !== 'function') throw new Error('error inputFn isn\'t a function');
+    return inputFn.bind(this)
+  };
 
   render = () => {
+    const newFn = this.bindFn(fetchUsersList);
+    // Use Context API to pass fetch functions into children?
+    // we can also pass in props into the Route components
+    // pass dispatch functions into children to make calls to update state?
     return(
-      <BrowserRouter>
+      <>
         <NavBar
           id='nav'
           navClass='nav'
@@ -51,18 +79,15 @@ export class App extends Component {
           </NavLink>
         </NavBar>
         <section>
-          <List
-            listType='ul'
-          >
-            {'I am the walrus'}
-          </List>
-          <Button
-            className='btn btn-primary'
-            onClickFn={()=>console.log('hi')}
-            innerText='Yeet'
-          />
+          <Route exact path="/" render={(props) => (
+            <Landing
+              {...props}
+              fetchUsersFn={newFn}
+            />
+          )} />
+          <Route path="/users" component={Users} />
         </section>
-      </BrowserRouter>
+      </>
     )
   }
 }
