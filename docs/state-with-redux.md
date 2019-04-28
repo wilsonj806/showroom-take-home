@@ -63,7 +63,7 @@ const reducer = (state = [], action) => {
 Then the component would call it like so:
 ```js
 const fetchStuff = () => dispatch => {
-  dispatch(requestAllUsers);
+  dispatch(fetchAllUsers);
   return fetchUsersFn()
     .then(json => {
       dispatch(fetchAllUsersSuccess(json.users))
