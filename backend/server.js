@@ -10,6 +10,7 @@
 const express = require('express');
 const sequelize = require('./models/Sequelize');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 // Import Routes
 const routeUsers = require('./routes/users');
@@ -38,10 +39,19 @@ sequelize
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use('/show', routeSingleShow);
-app.use('/shows', routeShows);
-app.use('/user', routeSingleUser);
-app.use('/users', routeUsers);
+// Use CORS proxy middleware
+const corsOptions = {
+  origin: 'http://localhost:3000/',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
+
+// Use routes specific to the app
+
+app.use('/show', cors(corsOptions), routeSingleShow);
+app.use('/shows', cors(corsOptions), routeShows);
+app.use('/user', cors(corsOptions), routeSingleUser);
+app.use('/users', cors(corsOptions), routeUsers);
 
 
 app.listen(PORT, () => console.log(`Server started on port: ${PORT}`));
