@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Route, NavLink } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
 import { List, NavBar, Button } from './components/component.lib';
 import { Landing } from './layouts/Landing';
 import { Users } from './layouts/Users';
+import { Login } from './layouts/Login';
 
 import { fetchUsersList } from '../stateFn/stateUsers';
 
@@ -14,6 +15,8 @@ const initialState = {
   shows: [],
   genres: [],
   comments: [],
+  isLoggedIn: false,
+  loggedInAs: null,
   isMakingRequest: false,
   isUpToDate: true,
   tablesNotUpToDate: null,
@@ -54,40 +57,26 @@ export class App extends Component {
       <>
         <NavBar
           id='nav'
-          navClass='nav'
+          navClass='nav navbar-dark bg-primary'
           listItemClass='nav__item'
           listClass='nav__list'
-        >
-          <NavLink
-            key={1}
-            to='/'
-          >
-            Home
-          </NavLink>
-          <NavLink
-            key={2}
-            to='/users'
-          >
-            Users
-          </NavLink>
-          <NavLink
-            key={3}
-            to='/shows'
-          >
-            Shows
-          </NavLink>
-        </NavBar>
+        />
         <div className='route-ctr'>
           <Route exact path="/" render={(props) => (
             <Landing
               {...props}
             />
           )} />
-          <Route path="/users" render={(props) => (
+          <Route path="/users" exact render={(props) => (
             <Users
               {...props}
               usersList={this.state.users}
               fetchUsersFn={this.bindFn(fetchUsersList)}
+            />
+          )} />
+          <Route path="/users/login" component={(props) => (
+            <Login
+              {...props}
             />
           )} />
         </div>

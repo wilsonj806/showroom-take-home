@@ -8,7 +8,7 @@ export { ListItem } from "./presentational/List/ListItem";
 export { Img } from "./presentational/Img";
 export { Paragraph } from "./presentational/Paragraph";
 export { Heading } from "./presentational/Heading";
-export { Card } from "./presentational/Card/Card";
+export { Card } from "./presentational/Card";
 
 /**
  * Hybrid Components

@@ -13,14 +13,14 @@ class Landing extends Component {
     const text = 'Welcome to the TV Show WatchList App!';
     return(
       <section
-        className='landing'
+        className='single-card'
       >
         <Card
           className='card'
           style={style}
         >
           <Heading
-            className=''
+            className='text-center h1'
             headingType={1}
             innerText='Welcome!'
           />
@@ -31,11 +31,6 @@ class Landing extends Component {
               ${text}
             `}
           </Paragraph>
-          <Button
-            className='btn btn-primary'
-            onClickFn={()=>console.log('hi')}
-            innerText='Fetch stuff'
-          />
         </Card>
       </section>
     )

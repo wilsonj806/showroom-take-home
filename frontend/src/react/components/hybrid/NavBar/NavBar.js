@@ -1,28 +1,70 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 
 import './navbar.css';
-import { List, Heading } from '../../component.lib';
+import { List, Heading, Button } from '../../component.lib';
+
+const sayHi = () => console.log('hi');
 
 const NavBar = (props) => {
-  const { id, children, listClass, listItemClass, navClass } = props;
+  const { id, listClass, listItemClass, navClass, isLoggedIn } = props;
+  const logIn = isLoggedIn ? 'doo doo babby shark' : (
+    <NavLink
+      key={3}
+      to='/users/login'
+      className='btn btn-outline-warning'
+    >
+      Login
+    </NavLink>
+
+  )
   return(
     <nav
       id={id}
       className={navClass}
     >
-      <Heading
-        headingType={2}
-        className='nav__heading'
-        innerText='TV Show Watchlist'
-      />
-      <List
-        className={listClass}
-        listType='ul'
-        listItemClass={listItemClass}
+      <div
+        className='nav-left'
       >
-        {children}
-      </List>
+        <Heading
+          headingType={2}
+          className='nav__heading'
+          innerText='TV Show Watchlist'
+        />
+      </div>
+      <div
+        className='nav-right'
+      >
+        <List
+          className={listClass}
+          listType='ul'
+          listItemClass={listItemClass}
+        >
+          <NavLink
+            key={1}
+            to='/'
+            className='nav-link text-light'
+          >
+            Home
+          </NavLink>
+          <NavLink
+            key={2}
+            to='/users'
+            className='nav-link text-light'
+          >
+            Users
+          </NavLink>
+          <NavLink
+            key={3}
+            to='/shows'
+            className='nav-link text-light'
+          >
+            Shows
+          </NavLink>
+        </List>
+        {logIn}
+      </div>
     </nav>
   )
 }
@@ -33,6 +75,7 @@ NavBar.propTypes = {
   navClass: PropTypes.string,
   listClass: PropTypes.string,
   listItemClass: PropTypes.string,
+  isLoggedIn: PropTypes.bool
 }
 
 export { NavBar }
