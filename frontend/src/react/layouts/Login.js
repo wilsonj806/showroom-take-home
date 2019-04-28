@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { List, Heading, Img, Paragraph, Button, Card } from '../components/component.lib';
+import { Heading, Paragraph, Card } from '../components/component.lib';
 
 import PropTypes from 'prop-types';
 
 import './layouts.css';
-import { query } from 'express-validator/check';
 // TODO: maybe add a user and show count
 
 class Login extends Component {

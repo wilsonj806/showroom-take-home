@@ -10,7 +10,7 @@
   width: 100vw;
   height: 2.75rem;
   display: grid;
-  grid-template-columns: 1fr 0.5fr 1fr;
+  grid-template-columns: 1fr 0.5fr 2fr;
   grid-template-areas: 'left . right';
 }
 

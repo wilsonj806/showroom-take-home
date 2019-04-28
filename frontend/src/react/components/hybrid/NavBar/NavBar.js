@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 import './navbar.css';
-import { List, Heading, Button, Paragraph } from '../../component.lib';
+import { List, Heading, Paragraph } from '../../component.lib';
 
-const sayHi = () => console.log('hi');
 
 const NavBar = (props) => {
   const { id, listClass, listItemClass, navClass, loggedInAs } = props;
