@@ -5,6 +5,7 @@
  * Requests handled:
  * `/users`           : GET all users
  * `/users/register`  : POST new user
+ * `/users/login`     : GET single user for login
  *
  * Status:
  * `/users/`         : done
@@ -14,6 +15,31 @@ const express = require('express');
 const User = require('../models/user');
 
 const router = express.Router();
+
+/**
+ * POST single user for login
+ */
+router.post('/login', async (req, res) => {
+  try {
+    console.log(req.body);
+    const queryUsers = await User.findOne({
+      where: {
+        username: req.body.username
+      }
+    });
+    if(queryUsers == null || queryUsers.length === 0) {
+      // TODO flesh this out more
+      res.status(404).json({
+        status: 404,
+        msg: `Error, user with username: ${req.body.username} not found`
+      }).send();
+    } else {
+      res.status(200).json({msg: 'Login Successful'}).send();
+    }
+  } catch(error) {
+    res.status(500).send();
+  }
+});
 
 /**
  * GET all users

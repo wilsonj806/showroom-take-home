@@ -3,13 +3,19 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
 import './navbar.css';
-import { List, Heading, Button } from '../../component.lib';
+import { List, Heading, Button, Paragraph } from '../../component.lib';
 
 const sayHi = () => console.log('hi');
 
 const NavBar = (props) => {
-  const { id, listClass, listItemClass, navClass, isLoggedIn } = props;
-  const logIn = isLoggedIn ? 'doo doo babby shark' : (
+  const { id, listClass, listItemClass, navClass, loggedInAs } = props;
+  const logIn = loggedInAs ? (
+    <Paragraph
+      className='login-msg text-light lead'
+    >
+      <b>{`Logged in as ${loggedInAs}`}</b>
+    </Paragraph>
+    ) : (
     <NavLink
       key={3}
       to='/users/login'
@@ -75,7 +81,8 @@ NavBar.propTypes = {
   navClass: PropTypes.string,
   listClass: PropTypes.string,
   listItemClass: PropTypes.string,
-  isLoggedIn: PropTypes.bool
+  isLoggedIn: PropTypes.bool,
+  loggedInAs: PropTypes.string
 }
 
 export { NavBar }

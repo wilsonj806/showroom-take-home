@@ -8,7 +8,7 @@ import { Landing } from './layouts/Landing';
 import { Users } from './layouts/Users';
 import { Login } from './layouts/Login';
 
-import { fetchUsersList } from '../stateFn/stateUsers';
+import { fetchUsersList, queryLogin } from '../stateFn/stateUsers';
 
 const initialState = {
   users: [],
@@ -39,6 +39,7 @@ const asyncDispatch = async () => {
   }
 }
 */
+
 export class App extends Component {
   constructor(props) {
     super(props);
@@ -46,13 +47,14 @@ export class App extends Component {
   }
   bindFn = (inputFn) => {
     if(typeof inputFn !== 'function') throw new Error('error inputFn isn\'t a function');
-    return inputFn.bind(this)
+    return inputFn.bind(this);
   };
 
   render = () => {
     // Use Context API to pass fetch functions into children?
     // we can also pass in props into the Route components
     // pass dispatch functions into children to make calls to update state?
+    const { isLoggedIn, loggedInAs } = this.state
     return(
       <>
         <NavBar
@@ -60,6 +62,7 @@ export class App extends Component {
           navClass='nav navbar-dark bg-primary'
           listItemClass='nav__item'
           listClass='nav__list'
+          loggedInAs={isLoggedIn === true ? loggedInAs : null}
         />
         <div className='route-ctr'>
           <Route exact path="/" render={(props) => (
@@ -77,6 +80,7 @@ export class App extends Component {
           <Route path="/users/login" component={(props) => (
             <Login
               {...props}
+              queryLoginFn={this.bindFn(queryLogin)}
             />
           )} />
         </div>
