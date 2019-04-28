@@ -35,7 +35,9 @@ router.get('/post', async (req, res) => {
     res.json({genres: genres});
   } catch(error) {
     console.log(error);
-    res.status(500).send();
+    res.status(500).json({
+      msg: `500 Error`
+    }).send();
   }
 });
 
@@ -51,7 +53,10 @@ router.get('/:id', async (req, res) => {
     });
     if(queryUsers == null || queryUsers.length === 0) {
       // TODO flesh this out more
-      res.status(404).send();
+      res.status(404).json({
+        status: 404,
+        msg: `Error, user with id: ${req.params.id} not found`
+      }).send();
     } else {
       const singleUser = queryUsers.dataValues;
       res.json({users: singleUser});

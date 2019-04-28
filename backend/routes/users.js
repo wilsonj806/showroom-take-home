@@ -54,7 +54,9 @@ router.post('/register', async (req, res) => {
       res.status(200).send();
     } else {
       // TODO flesh this out more
-      res.status(409).send();
+      res.status(409).json({
+        msg: `409 Error, username: ${username} already exists`
+      }).send();
     }
   } catch(error) {
     res.status(500).send();
