@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
-import { List, Heading, Img, Paragraph, Button, Card } from '../components/component.lib';
+import { Heading, Paragraph, Card } from '../components/component.lib';
 
 import PropTypes from 'prop-types';
 
 import './layouts.css';
+
+import { HOME } from '../../stateFn/stateCommon';
 // TODO: maybe add a user and show count
 
 class Landing extends Component {
   componentDidMount = () => {
-
+    this.props.updateLocation(HOME);
   }
 
   render = () => {
     const text = 'Welcome to the TV Show WatchList App!';
     const { loggedInAs } = this.props;
-    const loginWelcome = loggedInAs ? `Logged in as ${loggedInAs}` : `Currently not logged in`;
+    const loginWelcome = loggedInAs ? `Logged in as ${loggedInAs.username}` : `Currently not logged in`;
     return(
       <section
         className='single-card'

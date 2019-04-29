@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import './layouts.css';
 // TODO: maybe add a user and show count
 
+import { LOGIN } from '../../stateFn/stateCommon';
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +17,7 @@ class Login extends Component {
     this.userNameRef = React.createRef();
   }
   componentDidMount = () => {
-
+    this.props.updateLocation(LOGIN);
   }
 
   componentWillUnmount = () => {

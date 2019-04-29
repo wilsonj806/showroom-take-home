@@ -12,7 +12,7 @@ const NavBar = (props) => {
     <Paragraph
       className='login-msg text-light lead'
     >
-      <b>{`Logged in as ${loggedInAs}`}</b>
+      <b>{`Logged in as ${loggedInAs.username}`}</b>
     </Paragraph>
     ) : (
     <NavLink

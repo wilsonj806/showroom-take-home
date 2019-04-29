@@ -6,18 +6,16 @@ async function fetchSingleUsersProfile(userId = null) {
   if (userId == null) throw new Error('Error');
   this.setState((prevState)=> {
     return Object.assign({}, prevState, {
-      isMakingRequest: BEGIN,
+      requestStatus: BEGIN,
     });
   });
   try {
     const modifiedEndpoint = endpoint + userId;
-    console.log(modifiedEndpoint);
     const dbCall = await fetch(modifiedEndpoint)
     const data = await dbCall.clone().json();
-    console.log(data);
     this.setState((prevState)=> {
       return Object.assign({}, prevState, {
-        isUpToDate: SUCCESS,
+        requestStatus: SUCCESS,
         userProfileToShow: {
           user: data.user,
           shows: data.shows
@@ -25,14 +23,14 @@ async function fetchSingleUsersProfile(userId = null) {
       });
     });
   } catch(error) {
-    return console.log(error);
+    this.setState((prevState)=> {
+      return Object.assign({}, prevState, {
+        requestStatus: FAILURE
+      });
+    });
+    console.log(error);
   }
 
-  this.setState((prevState)=> {
-    return Object.assign({}, prevState, {
-      isMakingRequest: FAILURE
-    });
-  });
   return;
 }
 

@@ -21,13 +21,13 @@ async function fetchUsersList() {
       });
     });
   } catch(error) {
+    this.setState((prevState)=> {
+      return Object.assign({}, prevState, {
+        requestStatus: FAILURE
+      });
+    });
     console.log(error);
   }
-  this.setState((prevState)=> {
-    return Object.assign({}, prevState, {
-      requestStatus: FAILURE
-    });
-  });
 }
 
 async function queryLogin(username) {
@@ -42,10 +42,12 @@ async function queryLogin(username) {
   const dbCall = await fetch(endpoint + '/login', init);
   const response = await dbCall.clone().json();
   // todo add flash message
-  console.log(response);
   this.setState({
     isLoggedIn: true,
-    loggedInAs: username
+    loggedInAs: {
+      id: response.id,
+      username: username
+    }
   });
 }
 

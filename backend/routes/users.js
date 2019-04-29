@@ -21,7 +21,6 @@ const router = express.Router();
  */
 router.post('/login', async (req, res) => {
   try {
-    console.log(req.body);
     const queryUsers = await User.findOne({
       where: {
         username: req.body.username
@@ -34,7 +33,8 @@ router.post('/login', async (req, res) => {
         msg: `Error, user with username: ${req.body.username} not found`
       }).send();
     } else {
-      res.status(200).json({msg: 'Login Successful'}).send();
+      console.log(queryUsers.dataValues);
+      res.status(200).json({msg: 'Login Successful', id: queryUsers.dataValues.id}).send();
     }
   } catch(error) {
     res.status(500).send();

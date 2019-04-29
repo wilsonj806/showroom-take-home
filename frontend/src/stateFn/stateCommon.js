@@ -20,7 +20,7 @@ const resetStateVal = (key) => {
   });
 }
 
-const updateLocation = (location) => {
+function updateLocation(location) {
   const isValidLocation = locationArr.some(entry => location === entry);
   if(isValidLocation === false) throw new Error('Location does not match with expected values');
   this.setState({currentPage: location});
