@@ -4,26 +4,53 @@ import { NavLink } from 'react-router-dom';
 
 import './navbar.css';
 import { List, Heading, Paragraph } from '../../component.lib';
+import { Button } from '../../presentational/Button';
 
 
 const NavBar = (props) => {
-  const { id, listClass, listItemClass, navClass, loggedInAs } = props;
+  const { id, listClass, listItemClass, navClass, loggedInAs, logoutFn } = props;
   const logIn = loggedInAs ? (
-    <Paragraph
-      className='login-msg text-light lead'
-    >
-      <b>{`Logged in as ${loggedInAs.username}`}</b>
-    </Paragraph>
+    <>
+      <Paragraph
+        className='login-msg text-light lead' style={{marginRight: '0.75rem'}}
+      >
+        <b>{`Logged in as ${loggedInAs.username}`}</b>
+      </Paragraph>
+      <Button
+        onClickFn={logoutFn}
+        innerText='Logout'
+        className='btn btn-secondary'
+    />
+    </>
     ) : (
-    <NavLink
-      key={3}
-      to='/users/login'
-      className='btn btn-outline-warning'
-    >
-      Login
-    </NavLink>
+    <>
+      <NavLink
+        key={3}
+        to='/users/login'
+        className='btn btn-outline-warning'
+        style={{marginRight: '0.75rem'}}
+      >
+        Login
+      </NavLink>
+      <NavLink
+        key={4}
+        to='/users/register'
+        className='btn btn-info'
+      >
+        Register
+      </NavLink>
+    </>
 
-  )
+  );
+  const postShow = loggedInAs != null ? (
+    <NavLink
+      key={4}
+      to={`/user/post/${loggedInAs.id}`}
+      className='nav-link text-light'
+    >
+      Post New Show
+    </NavLink>
+  ) : null;
   return(
     <nav
       id={id}
@@ -67,6 +94,7 @@ const NavBar = (props) => {
           >
             Shows
           </NavLink>
+          {postShow}
         </List>
         {logIn}
       </div>
@@ -82,7 +110,7 @@ NavBar.propTypes = {
   listItemClass: PropTypes.string,
   isLoggedIn: PropTypes.bool,
   loggedInAs: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     username: PropTypes.string
   })
 }

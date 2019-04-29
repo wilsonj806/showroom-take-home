@@ -42,16 +42,26 @@ async function queryLogin(username) {
   const dbCall = await fetch(endpoint + '/login', init);
   const response = await dbCall.clone().json();
   // todo add flash message
+  if (response.status === 404) {
+    this.setState({msg: response});
+    return;
+  }
   this.setState({
     isLoggedIn: true,
     loggedInAs: {
       id: response.id,
       username: username
-    }
+    },
+    msg: response
   });
+}
+
+function logoutOfProfile() {
+  this.setState({loggedInAs: null, isLoggedIn: false, msg: {msg: 'Logged out successfully'}});
 }
 
 export {
   fetchUsersList,
-  queryLogin
+  queryLogin,
+  logoutOfProfile,
 }

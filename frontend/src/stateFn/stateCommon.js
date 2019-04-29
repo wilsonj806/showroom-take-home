@@ -27,6 +27,14 @@ function updateLocation(location) {
   this.setState({currentPage: location});
 }
 
+function resetMsg() {
+  window.setTimeout(() => {
+    this.setState({
+      msg: null
+    });
+  }, 8000)
+}
+
 /**
  * Costants
  */
@@ -50,5 +58,6 @@ export {
  */
 export {
   resetStateVal,
+  resetMsg,
   updateLocation
 }

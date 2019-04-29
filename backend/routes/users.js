@@ -34,7 +34,7 @@ router.post('/login', async (req, res) => {
       }).send();
     } else {
       console.log(queryUsers.dataValues);
-      res.status(200).json({msg: 'Login Successful', id: queryUsers.dataValues.id}).send();
+      res.status(200).json({status: 200, msg: 'Login Successful', id: queryUsers.dataValues.id}).send();
     }
   } catch(error) {
     res.status(500).send();
