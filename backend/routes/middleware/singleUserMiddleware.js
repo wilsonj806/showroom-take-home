@@ -22,7 +22,6 @@ const getSingleUser = async (req, res, next) => {
   } catch(error) {
     console.log(error);
     res.status(500).send();
-    throw new Error('Error');
   }
   next();
 }
@@ -33,12 +32,12 @@ const getShowsForSingleUser = async (req, res, next) => {
       where: {
         user_id: req.params.id
       }
-    }).catch(error=> {throw new Error(`${error}`)});
+    });
     if(queryShows == null || queryShows.length === 0) {
       res.status(404).json({
         status2: 404,
         msg2: `Error, user with id: ${req.params.id} not found`
-      }).send();
+      });
     } else {
       const shows = queryShows.map(show => {
         const { id, title, img_url, genre_id } = show.dataValues
@@ -49,11 +48,10 @@ const getShowsForSingleUser = async (req, res, next) => {
           genre_id: genre_id
         }
       });
-      console.log(shows);
       res.json({
         user: res.locals.user,
         shows: shows
-      }).send();
+      });
     }
   } catch(error) {
     console.log('here be error');

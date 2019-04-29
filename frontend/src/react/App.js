@@ -12,7 +12,7 @@ import { Login } from './layouts/Login';
 
 import { fetchUsersList, queryLogin } from '../stateFn/stateUsers';
 import { fetchShowsList } from '../stateFn/stateShows';
-import { fetchSingleUsersProfile } from '../stateFn/stateSingleUser';
+import { fetchSingleUsersProfile, disposeProfile } from '../stateFn/stateSingleUser';
 
 import { IDLE, HOME, updateLocation } from '../stateFn/stateCommon';
 
@@ -21,7 +21,7 @@ const initialState = {
   shows: [],
   genres: [],
   comments: [],
-  userProfileToShow: {},
+  userProfileToShow: null,
   showProfileToShow: null,
   isLoggedIn: false,
   loggedInAs: null,
@@ -62,14 +62,15 @@ export class App extends Component {
           <Route exact path="/" render={(props) => (
             <Landing
               {...props}
-              updateLocation={updateLocation.bind(this)}
+              updateLocation={this.bindFn(updateLocation)}
               loggedInAs={isLoggedIn === true ? loggedInAs : null}
             />
           )} />
           <Route path="/users" exact render={(props) => (
             <Users
               {...props}
-              updateLocation={updateLocation.bind(this)}
+              updateLocation={this.bindFn(updateLocation)}
+              loggedInAs={this.state.loggedInAs}
               usersList={this.state.users}
               fetchUsersFn={this.bindFn(fetchUsersList)}
             />
@@ -77,6 +78,7 @@ export class App extends Component {
           <Route path="/shows" exact render={(props) => (
             <Shows
               {...props}
+              updateLocation={this.bindFn(updateLocation)}
               showsList={this.state.shows}
               fetchShowsFn={this.bindFn(fetchShowsList)}
             />
@@ -84,12 +86,16 @@ export class App extends Component {
           <Route path="/users/login" render={(props) => (
             <Login
               {...props}
+              isLoggedIn={this.state.isLoggedIn}
+              updateLocation={this.bindFn(updateLocation)}
               queryLoginFn={this.bindFn(queryLogin)}
             />
           )} />
-          <Route path="/user/search" render={(props) => (
+          <Route path="/user/" render={(props) => (
             <UserProfile
               {...props}
+              disposeProfileFn={disposeProfile.bind(this)}
+              updateLocation={this.bindFn(updateLocation)}
               fetchSingleUsersProfileFn={this.bindFn(fetchSingleUsersProfile)}
               userProfile={this.state.userProfileToShow}
             />
