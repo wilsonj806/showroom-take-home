@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import { List, Heading, Img, Card, Paragraph, Button } from '../components/component.lib';
+
 
 import { USER_PROFILE } from '../../stateFn/stateCommon';
 
@@ -32,6 +34,7 @@ class UserProfile extends Component {
 
   renderFromProps = () => {
     if (this.props.userProfile == null) return null;
+    const { loggedInAs } = this.props;
     const { shows, user } = this.props.userProfile;
     const map = shows.map((show) => {
       const { genre_id, id, img_url, title} = show;
@@ -60,7 +63,10 @@ class UserProfile extends Component {
           innerText={`User: ${username}`}
       />
     );
-    return [primHeading, map];
+    const postShow = (loggedInAs !== null && loggedInAs.username === username) ? (
+      <Link to={`/user/post/${id}`} className='btn btn-primary'>Post New Show</Link>
+    ) : null;
+    return [primHeading, map, postShow];
   }
 
   render = () => {
@@ -70,6 +76,11 @@ class UserProfile extends Component {
         className=''
       >
         {this.props.userProfile != null ? eleToRender[0] : null}
+        <Heading
+            headingType={3}
+            className='h3'
+            innerText='Now Watching'
+          />
         <List
           className='list--shows'
           listItemClass='list__item'
@@ -77,6 +88,7 @@ class UserProfile extends Component {
         >
           {this.props.userProfile != null ? eleToRender[1] : null}
         </List>
+        {this.props.userProfile != null ? eleToRender[2] : null}
       </section>
     )
   }

@@ -10,8 +10,9 @@ const USERS = 'USERS';
 const USER_PROFILE = 'USER_PROFILE';
 const SHOWS = 'SHOWS';
 const SHOW_PROFILE = 'SHOW_PROFILE';
+const POST_SHOW = 'POST_SHOW';
 
-const locationArr = [HOME, USERS, LOGIN, USER_PROFILE, SHOWS, SHOW_PROFILE];
+const locationArr = [HOME, USERS, LOGIN, USER_PROFILE, SHOWS, SHOW_PROFILE, POST_SHOW];
 const resetStateVal = (key) => {
   if (typeof key !== 'string') throw new Error('Expecting key to be a string');
   console.log(this);
@@ -40,7 +41,8 @@ export {
   USERS,
   USER_PROFILE,
   SHOWS,
-  SHOW_PROFILE
+  SHOW_PROFILE,
+  POST_SHOW
 }
 
 /**

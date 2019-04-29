@@ -1,7 +1,13 @@
 .list--shows {
   list-style: none;
-  width: 20rem;
+  width: 80rem;
   padding: 0;
+}
+
+.list--shows > .list__item {
+  display: inline-block;
+  margin: 0;
+  width: 40rem;
 }
 
 .list--users {

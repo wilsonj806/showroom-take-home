@@ -49,6 +49,29 @@ function disposeProfile(profileType = '') {
   });
 }
 
+async function queryShows(formData) {
+  const { user_id, genre_id, title, img_url } = formData;
+  const init = {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      user_id: user_id,
+      genre_id: genre_id,
+      title: title,
+      img_url: img_url
+    }),
+  }
+  const dbCall = await fetch(endpoint + '/post', init);
+  const response = await dbCall.clone().json();
+  // TODO add flash message
+  this.setState({
+
+  });
+}
+
 export {
   fetchSingleUsersProfile,
   disposeProfile

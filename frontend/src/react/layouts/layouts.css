@@ -30,10 +30,6 @@
 .single-column {
   width: 100vw;
   min-height: 100%;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
 }
 
 .article {

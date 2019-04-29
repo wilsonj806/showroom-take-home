@@ -9,6 +9,7 @@ import { Users } from './layouts/Users';
 import { UserProfile } from './layouts/UserProfile';
 import { Shows } from './layouts/Shows';
 import { Login } from './layouts/Login';
+import { PostShow } from './layouts/PostShow';
 
 import { fetchUsersList, queryLogin } from '../stateFn/stateUsers';
 import { fetchShowsList } from '../stateFn/stateShows';
@@ -91,9 +92,19 @@ export class App extends Component {
               queryLoginFn={this.bindFn(queryLogin)}
             />
           )} />
-          <Route path="/user/" render={(props) => (
+          <Route path="/user/post/:id" strict={true} render={(props) => (
+            <PostShow
+              {...props}
+              loggedInAs={isLoggedIn === true ? loggedInAs : null}
+              updateLocation={this.bindFn(updateLocation)}
+              fetchSingleUsersProfileFn={this.bindFn(fetchSingleUsersProfile)}
+              userProfile={this.state.userProfileToShow}
+            />
+          )} />
+          <Route path="/user/:id" strict={true} render={(props) => (
             <UserProfile
               {...props}
+              loggedInAs={isLoggedIn === true ? loggedInAs : null}
               disposeProfileFn={disposeProfile.bind(this)}
               updateLocation={this.bindFn(updateLocation)}
               fetchSingleUsersProfileFn={this.bindFn(fetchSingleUsersProfile)}

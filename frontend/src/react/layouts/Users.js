@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import { List, Heading, Img, Button, Card, Paragraph } from '../components/component.lib';
+
 import { USERS } from '../../stateFn/stateCommon';
 
 class Users extends Component {
@@ -24,7 +25,7 @@ class Users extends Component {
         >
           <Link key={i} to={`/user/${id}`}>
             <Paragraph
-              style={{margin:'0px', padding: '0.75rem'}}
+              style={{margin:'0px', padding: '0.75rem', fontSize:'1.25rem'}}
             >
               {username}
             </Paragraph>
@@ -51,8 +52,8 @@ class Users extends Component {
         className='single-column'
       >
         <div
-          className='users-wrapper'
-          style={{width: '33%'}}
+          className='users-wrapper mx-auto mt-5'
+          style={{width: '33%', height: '60vh'}}
         >
           <Heading
             headingType={1}
