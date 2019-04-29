@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import { List, Heading, Img, Button, ListItem } from '../components/component.lib';
 
 
 class Users extends Component {
   componentDidMount = () => {
-    this.props.fetchUsersFn();
+    if(this.props.usersList.length === 0) {
+      this.props.fetchUsersFn();
+    }
   }
 
   mapUsersList = () => {
     const { usersList } = this.props;
-    return usersList.map((user) => user.username);
+    return usersList.map((user) => {
+      const { id, username} = user;
+      return (
+        <Link to={`/user/search/${id}`}>{username}</Link>
+      )
+    });
   }
 
   render = () => {

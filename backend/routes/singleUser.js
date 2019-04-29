@@ -5,18 +5,24 @@
  * Requests handled:
  * `/user/post` : POST new show for logged in user
  * `/user/post` : GET genres
- * `/user/:id`  : GET single user information
+ * `/user/:id`  : GET single user profile
  *
  * Status:
  * `/user/post` : done
  * `/user/:id`  : done
+ * `/user/:id`  : partial complete NEEDS GENRE
  */
 const express = require('express');
 const Show = require('../models/show');
 const User = require('../models/user');
 const Genre = require('../models/genre');
 
+const middleware = require('./middleware/singleUserMiddleware');
+
 const { body, validationResult } = require('express-validator/check');
+
+
+const { getShowsForSingleUser, getSingleUser } = middleware;
 
 const router = express.Router();
 
@@ -26,6 +32,7 @@ const router = express.Router();
  */
 router.get('/post', async (req, res) => {
   try {
+    console.log('hi');
     const queryGenres = await Genre.findAll();
     const genres = queryGenres.map(genre => {
       return {
@@ -38,31 +45,6 @@ router.get('/post', async (req, res) => {
     res.status(500).json({
       msg: `500 Error`
     }).send();
-  }
-});
-
-/**
- * GET single user
- */
-router.get('/:id', async (req, res) => {
-  try {
-    const queryUsers = await User.findOne({
-      where: {
-        id: req.params.id
-      }
-    });
-    if(queryUsers == null || queryUsers.length === 0) {
-      // TODO flesh this out more
-      res.status(404).json({
-        status: 404,
-        msg: `Error, user with id: ${req.params.id} not found`
-      }).send();
-    } else {
-      const singleUser = queryUsers.dataValues;
-      res.json({users: singleUser});
-    }
-  } catch(error) {
-    res.status(500).send();
   }
 });
 
@@ -103,5 +85,10 @@ router.post('/post', [
     res.status(500).send();
   }
 });
+
+/**
+ * GET single user profile
+ */
+router.get('/search/:id', getSingleUser, getShowsForSingleUser);
 
 module.exports = router;

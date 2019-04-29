@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
-import { List, Heading, Img, Paragraph, Button, Card } from '../components/component.lib';
+import { Heading, Paragraph, Card } from '../components/component.lib';
+
+import PropTypes from 'prop-types';
 
 import './layouts.css';
+
+import { HOME } from '../../stateFn/stateCommon';
 // TODO: maybe add a user and show count
 
 class Landing extends Component {
   componentDidMount = () => {
-
+    this.props.updateLocation(HOME);
   }
 
   render = () => {
     const text = 'Welcome to the TV Show WatchList App!';
+    const { loggedInAs } = this.props;
+    const loginWelcome = loggedInAs ? `Logged in as ${loggedInAs.username}` : `Currently not logged in`;
     return(
       <section
         className='single-card'
@@ -27,9 +33,12 @@ class Landing extends Component {
           <Paragraph
             className="lead"
           >
-            {`
-              ${text}
-            `}
+            {text}
+          </Paragraph>
+          <Paragraph
+            className="lead"
+          >
+            {loginWelcome}
           </Paragraph>
         </Card>
       </section>
@@ -40,6 +49,10 @@ class Landing extends Component {
 const style = {
   width: '33vw',
   height: '20rem'
+}
+
+Landing.propTypes = {
+  loggedInAs: PropTypes.string
 }
 
 export { Landing }
