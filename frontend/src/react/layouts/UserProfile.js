@@ -29,10 +29,11 @@ class UserProfile extends Component {
   splitUrl = (urlLocation) => {
     return parseInt(urlLocation.split(/\//)[2]);
   }
-  mapShowsList = () => {
+
+  renderFromProps = () => {
     if (this.props.userProfile == null) return null;
-    const { shows } = this.props.userProfile;
-    return shows.map((show) => {
+    const { shows, user } = this.props.userProfile;
+    const map = shows.map((show) => {
       const { genre_id, id, img_url, title} = show;
       return (
         <Card
@@ -46,29 +47,35 @@ class UserProfile extends Component {
           <Heading
             headingType={4}
             className='subtitle'
-            innerText={genre_id}
+            innerText={`${genre_id}`}
           />
           <Img style={thumbnailStyle} src={img_url} alt={`Show image for ${id}`}/>
         </Card>
       )
     });
+    const { id, username } = user;
+    const primHeading = (
+      <Heading
+          headingType={1}
+          innerText={`User: ${username}`}
+      />
+    );
+    return [primHeading, map];
   }
 
   render = () => {
+    const eleToRender = this.renderFromProps();
     return(
       <section
         className=''
       >
-        <Heading
-          headingType={1}
-          innerText={`User: ${1}`}
-        />
+        {this.props.userProfile != null ? eleToRender[0] : null}
         <List
           className='list--shows'
           listItemClass='list__item'
           listType='ul'
         >
-          {this.mapShowsList()}
+          {this.props.userProfile != null ? eleToRender[1] : null}
         </List>
       </section>
     )
@@ -88,14 +95,14 @@ UserProfile.propTypes = {
       username: PropTypes.string,
       id: PropTypes.number
     }),
-    shows: PropTypes.arrayOf([
+    shows: PropTypes.arrayOf(
       PropTypes.shape({
         genre_id: PropTypes.number,
         id: PropTypes.number,
-        title: PropTypes.string,
         img_url: PropTypes.string,
+        title: PropTypes.string
       })
-    ])
+    )
   })
 }
 

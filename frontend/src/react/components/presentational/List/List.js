@@ -42,7 +42,7 @@ const mapToListItem = (children, listItemClass = 'list__item') => {
 
 List.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   listItemClass: PropTypes.string,
   listType: PropTypes.oneOf(['ol', 'ul']),
 };

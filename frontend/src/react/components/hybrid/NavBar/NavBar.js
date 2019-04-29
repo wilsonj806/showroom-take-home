@@ -81,7 +81,10 @@ NavBar.propTypes = {
   listClass: PropTypes.string,
   listItemClass: PropTypes.string,
   isLoggedIn: PropTypes.bool,
-  loggedInAs: PropTypes.string
+  loggedInAs: PropTypes.shape({
+    id: PropTypes.string,
+    username: PropTypes.string
+  })
 }
 
 export { NavBar }

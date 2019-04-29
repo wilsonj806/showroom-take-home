@@ -14,7 +14,7 @@ async function fetchSingleUsersProfile(userId = null) {
     console.log(modifiedEndpoint);
     const dbCall = await fetch(modifiedEndpoint)
     const data = await dbCall.clone().json();
-    console.log(data);
+    // console.log(data);
     this.setState((prevState)=> {
       return Object.assign({}, prevState, {
         requestStatus: SUCCESS,
