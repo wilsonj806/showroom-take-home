@@ -89,6 +89,6 @@ router.post('/post', [
 /**
  * GET single user profile
  */
-router.get('/search/:id', getSingleUser, getShowsForSingleUser);
+router.get('/:id', getSingleUser, getShowsForSingleUser);
 
 module.exports = router;

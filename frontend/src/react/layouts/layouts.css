@@ -1,3 +1,7 @@
+.route-ctr{
+  height: calc(100vh - 2.75rem);
+}
+
 .single-card {
   width: 100vw;
   min-height: 100vh;
@@ -21,4 +25,13 @@
 
 .form--login {
   width: 70%;
+}
+
+.single-column {
+  width: 100vw;
+  min-height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
 }

@@ -14,6 +14,7 @@ Some noteworthy requirements from the above:
 
 You'll need the following to run everything on this:
 - [Node](https://nodejs.org/en/)
+  - **NOTE** the backend scripting on this uses some ES7 syntax so a node version **at or above** v8.6.0 is recommended!
 - [Git](https://git-scm.com/)
 - [SQLite](https://www.sqlite.org/download.html)
 

@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import { Redirect } from 'react-router-dom';
+
 import { Heading, Paragraph, Card } from '../components/component.lib';
 
 import PropTypes from 'prop-types';
@@ -36,10 +39,13 @@ class Login extends Component {
   }
 
   render = () => {
+    const { isLoggedIn } = this.props;
+    const redirect = isLoggedIn === true ? <Redirect to='/'/> : null;
     return(
       <section
         className='single-card'
       >
+        {redirect}
         <Card
           className='card login__card'
         >
@@ -78,6 +84,7 @@ class Login extends Component {
 }
 
 Login.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
   queryLoginFn: PropTypes.func.isRequired
 }
 

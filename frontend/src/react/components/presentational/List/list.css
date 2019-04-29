@@ -1,3 +1,14 @@
 .list--shows {
+  list-style: none;
   width: 20rem;
+  padding: 0;
+}
+
+.list--users {
+  list-style: none;
+  padding: 0;
+}
+
+.list__item--sm {
+  padding: 0.5rem 0.5rem;
 }
