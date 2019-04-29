@@ -56,6 +56,36 @@ async function queryLogin(username) {
   });
 }
 
+async function queryRegister(username) {
+  const init = {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({username: username}),
+  }
+  console.log('calling');
+  const dbCall = await fetch(endpoint + '/register', init);
+  const response = await dbCall.clone().json();
+  // todo add flash message
+  if (response.status === 409) {
+    this.setState({msg: response});
+    return;
+  }
+  this.setState({
+    isLoggedIn: true,
+    loggedInAs: {
+      id: response.id,
+      username: username
+    },
+    msg: {
+      status: response.status,
+      msg: response.msg
+    }
+  });
+}
+
 function logoutOfProfile() {
   this.setState({loggedInAs: null, isLoggedIn: false, msg: {msg: 'Logged out successfully'}});
 }
@@ -63,5 +93,6 @@ function logoutOfProfile() {
 export {
   fetchUsersList,
   queryLogin,
+  queryRegister,
   logoutOfProfile,
 }

@@ -9,9 +9,10 @@ import { Users } from './layouts/Users';
 import { UserProfile } from './layouts/UserProfile';
 import { Shows } from './layouts/Shows';
 import { Login } from './layouts/Login';
+import { Register } from './layouts/Register';
 import { PostShow } from './layouts/PostShow';
 
-import { fetchUsersList, queryLogin, logoutOfProfile } from '../stateFn/stateUsers';
+import { fetchUsersList, queryLogin, queryRegister, logoutOfProfile } from '../stateFn/stateUsers';
 import { fetchShowsList } from '../stateFn/stateShows';
 import { fetchSingleUsersProfile, disposeProfile } from '../stateFn/stateSingleUser';
 import { getGenres } from '../stateFn/statePostShow';
@@ -100,6 +101,14 @@ export class App extends Component {
               isLoggedIn={this.state.isLoggedIn}
               updateLocation={updateLocation.bind(this)}
               queryLoginFn={queryLogin.bind(this)}
+            />
+          )} />
+          <Route path="/users/register" render={(props) => (
+            <Register
+              {...props}
+              isLoggedIn={this.state.isLoggedIn}
+              updateLocation={updateLocation.bind(this)}
+              queryRegisterFn={queryRegister.bind(this)}
             />
           )} />
           <Route path="/user/:id" exact={true} render={(props) => (

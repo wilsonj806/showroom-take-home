@@ -35,7 +35,7 @@ const NavBar = (props) => {
       <NavLink
         key={4}
         to='/users/register'
-        className='btn btn-info'
+        className='btn btn-success'
       >
         Register
       </NavLink>
