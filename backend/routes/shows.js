@@ -6,7 +6,6 @@
  * `/shows`           : GET all DISTINCT shows
  * `/shows`           : GET all users
  * `/shows/genre/:id` : GET all shows for a specific genre_id
- * `/shows/user/:id`  : GET all shows for a specific user_id
  *
  * Status:
  * `/shows`           : done
@@ -30,34 +29,6 @@ const { getAllShowsAndSort, getUsers } = middleware;
  * GET all DISTINCT shows
  */
 router.get('/', getAllShowsAndSort, getUsers);
-
-/**
- * GET all shows for a user
- */
-router.get('/user/:id', async (req, res, next) => {
-  const queryShows = await Show.findAll({
-    where: {
-      user_id: req.params.id
-    }
-  });
-  if(queryUsers == null || queryUsers.length === 0) {
-    res.status(404).json({
-      status: 404,
-      msg: `Error, user with id: ${req.params.id} not found`
-    }).send();
-  } else {
-    const shows = queryShows.map(show => {
-      const { id, title, img_url, genre_id } = show.dataValues
-      return {
-        id: id,
-        title: title,
-        img_url: img_url,
-        genre_id: genre_id
-      }
-    });
-    res.json({shows: shows});
-  }
-});
 
 /**
  * GET all shows for a genre and for all users

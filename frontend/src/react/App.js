@@ -6,23 +6,29 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { List, NavBar, Button } from './components/component.lib';
 import { Landing } from './layouts/Landing';
 import { Users } from './layouts/Users';
+import { UserProfile } from './layouts/UserProfile';
 import { Shows } from './layouts/Shows';
 import { Login } from './layouts/Login';
 
 import { fetchUsersList, queryLogin } from '../stateFn/stateUsers';
 import { fetchShowsList } from '../stateFn/stateShows';
+import { fetchSingleUsersProfile } from '../stateFn/stateSingleUser';
+
+import { IDLE, HOME, updateLocation } from '../stateFn/stateCommon';
 
 const initialState = {
   users: [],
   shows: [],
   genres: [],
   comments: [],
+  userProfileToShow: {},
+  showProfileToShow: null,
   isLoggedIn: false,
   loggedInAs: null,
-  isMakingRequest: false,
+  requestStatus: IDLE,
   isUpToDate: true,
   tablesNotUpToDate: null,
-  currentPage: 'HOME',
+  currentPage: HOME,
   serverMessage: null,
 }
 
@@ -31,6 +37,11 @@ export class App extends Component {
     super(props);
     this.state = initialState;
   }
+
+  componentDidUpdate = () => {
+
+  }
+
   bindFn = (inputFn) => {
     if(typeof inputFn !== 'function') throw new Error('error inputFn isn\'t a function');
     return inputFn.bind(this);
@@ -51,12 +62,14 @@ export class App extends Component {
           <Route exact path="/" render={(props) => (
             <Landing
               {...props}
+              updateLocation={updateLocation.bind(this)}
               loggedInAs={isLoggedIn === true ? loggedInAs : null}
             />
           )} />
           <Route path="/users" exact render={(props) => (
             <Users
               {...props}
+              updateLocation={updateLocation.bind(this)}
               usersList={this.state.users}
               fetchUsersFn={this.bindFn(fetchUsersList)}
             />
@@ -68,10 +81,17 @@ export class App extends Component {
               fetchShowsFn={this.bindFn(fetchShowsList)}
             />
           )} />
-          <Route path="/users/login" component={(props) => (
+          <Route path="/users/login" render={(props) => (
             <Login
               {...props}
               queryLoginFn={this.bindFn(queryLogin)}
+            />
+          )} />
+          <Route path="/user/search" render={(props) => (
+            <UserProfile
+              {...props}
+              fetchSingleUsersProfileFn={this.bindFn(fetchSingleUsersProfile)}
+              userProfile={this.state.userProfileToShow}
             />
           )} />
         </div>

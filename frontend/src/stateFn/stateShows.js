@@ -1,11 +1,12 @@
 // NOTE if this is supposed to imitate Redux, it'd be better to have a method in <App/> to call this.setState instead
+import { BEGIN, SUCCESS, FAILURE } from './stateCommon';
+
 const endpoint = 'http://localhost:5000/shows';
 
 async function fetchShowsList() {
-  console.log(this);
   this.setState((prevState)=> {
     return Object.assign({}, prevState, {
-      isMakingRequest: !prevState.isMakingRequest,
+      requestStatus: BEGIN,
       isUpToDate: !prevState.isUpToDate
     });
   });
@@ -14,6 +15,7 @@ async function fetchShowsList() {
     const data = await dbCall.clone().json();
     this.setState((prevState)=> {
       return Object.assign({}, prevState, {
+        requestStatus: SUCCESS,
         isUpToDate: !prevState.isUpToDate,
         shows: data.shows
       });
@@ -23,7 +25,7 @@ async function fetchShowsList() {
   }
   this.setState((prevState)=> {
     return Object.assign({}, prevState, {
-      isMakingRequest: !prevState.isMakingRequest
+      requestStatus: FAILURE
     });
   });
 }
