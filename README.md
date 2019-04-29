@@ -8,6 +8,10 @@ Some noteworthy requirements from the above:
 - **Make sure to prepopulate your database with data**
 - The app does **not** need user authentication, and does not need passwords - only usernames
 
+## Summary
+
+A summary of what has been completed can be found in the [following document](./SUMMARY.md). It details what objectives/ tasks have been completed, and what will probably need fixing.
+
 ## Installation And Usage
 
 ### Quick Setup
@@ -17,6 +21,7 @@ You'll need the following to run everything on this:
   - **NOTE** the backend scripting on this uses some ES7 syntax so a node version **at or above** v8.6.0 is recommended!
 - [Git](https://git-scm.com/)
 - [SQLite](https://www.sqlite.org/download.html)
+- [Postman](https://www.getpostman.com/) to test backend routes
 
 The database for the assignment is located in `./backend/database` and is called `database.db`
 - it runs on SQLite(https://www.sqlite.org/index.html)

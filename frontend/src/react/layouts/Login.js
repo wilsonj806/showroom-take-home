@@ -47,7 +47,7 @@ class Login extends Component {
       >
         {redirect}
         <Card
-          className='card login__card'
+          className='card single-field__card'
         >
           <Heading
             className='text-center h1'
@@ -61,7 +61,7 @@ class Login extends Component {
           </Paragraph>
 
           <form
-            className='form--login'
+            className='form--single-field'
             onSubmit={this.onSubmitFn}
           >
             <div className='form-group'>

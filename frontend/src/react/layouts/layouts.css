@@ -10,7 +10,7 @@
   align-items: center;
 }
 
-.login__card {
+.single-field__card {
   width: 27%;
   height: 30rem;
   display: flex;
@@ -19,11 +19,11 @@
   align-items: center;
 }
 
-.login__card > * {
+.single-field__card > * {
   margin: 1rem 0;
 }
 
-.form--login {
+.form--single-field {
   width: 70%;
 }
 

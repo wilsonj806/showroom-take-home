@@ -10,7 +10,7 @@ class Message extends Component {
     if (this.props.msg == null) return null;
     const { msg } = this.props;
     const { status, msg: message } = msg;
-    const className = status === 404 ? 'alert alert-danger'
+    const className = (status === 404 || status === 409) ? 'alert alert-danger'
       : status === 200 ? 'alert alert-success'
       : 'alert alert-info'
     return (msg !== null) ? (
