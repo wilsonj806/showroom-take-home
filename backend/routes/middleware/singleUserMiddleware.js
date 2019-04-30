@@ -1,5 +1,6 @@
 const Show = require('../../models/show');
 const User = require('../../models/user');
+const Genre = require('../../models/genre');
 
 // TODO: Convert this to a INNER JOIN
 
@@ -32,8 +33,10 @@ const getShowsForSingleUser = async (req, res, next) => {
     const queryShows = await Show.findAll({
       where: {
         user_id: req.params.id
-      }
+      },
+      include: [{model: Genre}]
     });
+    // console.log(queryShowsAgain.map(show=> show.dataValues.genre.dataValues.genre_name));
     if(queryShows == null || queryShows.length === 0) {
       res.json({
         status: 200,
@@ -41,12 +44,14 @@ const getShowsForSingleUser = async (req, res, next) => {
       });
     } else {
       const shows = queryShows.map(show => {
-        const { id, title, img_url, genre_id } = show.dataValues
+        const { id, title, img_url, genre } = show.dataValues
+        const { genre_name, id: genre_id } = genre.dataValues;
         return {
           id: id,
           title: title,
           img_url: img_url,
-          genre_id: genre_id
+          genre_id: genre_id,
+          genre_name
         }
       });
       res.json({

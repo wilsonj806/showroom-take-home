@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import { List, Heading, Img, Card, Paragraph, Button } from '../components/component.lib';
+import { List, Heading, Img, Card, Paragraph, Button } from '../../components/component.lib';
 
+import './UserProfile.css';
 
-import { USER_PROFILE } from '../../stateFn/stateCommon';
+import { USER_PROFILE } from '../../../stateFn/stateCommon';
 
 const localState = {
   username: null,
@@ -36,24 +37,25 @@ class UserProfile extends Component {
     if (this.props.userProfile == null) return null;
     const { loggedInAs } = this.props;
     const { shows, user } = this.props.userProfile;
-    console.log(this.props.userProfile);
     const showsList = (shows) ? shows.map((show) => {
-      const { genre_id, id, img_url, title} = show;
+      const { genre_name, id, img_url, title} = show;
       return (
         <Card
-          className='card'
+          className='card card--show'
         >
+          <div className='ctr-show__img'>
+            <Img className='show__img'  src={img_url} alt={`Show image for ${id}`}/>
+          </div>
           <Heading
-            headingType={3}
-            className='h3'
+            headingType={5}
+            className='h5 heading--show-card'
             innerText={title}
           />
           <Heading
-            headingType={4}
-            className='subtitle'
-            innerText={`${genre_id}`}
+            headingType={5}
+            className='h5 show__genre'
+            innerText={`${genre_name}`}
           />
-          <Img style={thumbnailStyle} src={img_url} alt={`Show image for ${id}`}/>
         </Card>
       )
     }) : (
@@ -80,30 +82,33 @@ class UserProfile extends Component {
     const eleToRender = this.renderFromProps();
     return(
       <section
-        className=''
+        className='user-profile mx-auto'
       >
-        {this.props.userProfile != null ? eleToRender[0] : null}
-        <Heading
-            headingType={3}
-            className='h3'
-            innerText='Now Watching'
-          />
-        <List
-          className='list--shows'
-          listItemClass='list__item'
-          listType='ul'
-        >
-          {this.props.userProfile != null ? eleToRender[1] : null}
-        </List>
-        {this.props.userProfile != null ? eleToRender[2] : null}
+        <div className='ctr-header'>
+          <Img className='profile__img' src='https://upload.wikimedia.org/wikipedia/commons/b/b8/Placeholder-image.png' alt='placeholder' />
+          {this.props.userProfile != null ? eleToRender[0] : null}
+        </div>
+        <div className='ctr-list'>
+          <hr></hr>
+          <Heading
+              headingType={3}
+              className='h3 mt-5 mb-2'
+              innerText='Now Watching'
+            />
+          <List
+            className='list--shows'
+            listItemClass='list__item'
+            listType='ul'
+          >
+            {this.props.userProfile != null ? eleToRender[1] : null}
+          </List>
+        </div>
+        <div className='ctr-post'>
+          {this.props.userProfile != null ? eleToRender[2] : null}
+        </div>
       </section>
     )
   }
-}
-
-const thumbnailStyle = {
-  maxWidth: '10rem',
-  height: 'auto'
 }
 
 UserProfile.propTypes = {

@@ -6,7 +6,15 @@ First full stack project, which was coincidentally something I was getting to wh
 
 ## Things Completed
 
-- Backend routes
+### Backend Tasks Completed
+
+Most, if not all backend routes have been implemented in some way. It should more or less match the [requirements](./REQUIREMENTS.md) and or the notes in the [routing doc](./docs/routing.md).
+
+In addition, you should be able to test them if you use the following [Postman collection link](https://www.getpostman.com/collections/22c04a524988a5e62425)
+
+### Frontend Tasks COmpleted
+
+
 
 
 ## To Fix

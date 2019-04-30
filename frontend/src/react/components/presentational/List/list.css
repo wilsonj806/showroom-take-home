@@ -1,13 +1,18 @@
 .list--shows {
   list-style: none;
-  width: 80rem;
+  width: 100%;
   padding: 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .list--shows > .list__item {
+  width: 47%;
+  margin: 3rem 0;
+  height: 15rem;
   display: inline-block;
-  margin: 0;
-  width: 40rem;
 }
 
 .list--users {

@@ -3,10 +3,10 @@ import { Route } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
-import { List, NavBar, Button, Message } from './components/component.lib';
+import { NavBar, Message } from './components/component.lib';
 import { Landing } from './layouts/Landing';
 import { Users } from './layouts/Users';
-import { UserProfile } from './layouts/UserProfile';
+import { UserProfile } from './layouts/UserProfile/UserProfile';
 import { Shows } from './layouts/Shows';
 import { Login } from './layouts/Login';
 import { Register } from './layouts/Register';
