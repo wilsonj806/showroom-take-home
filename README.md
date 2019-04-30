@@ -24,7 +24,7 @@ You'll need the following to run everything on this:
 - [Postman](https://www.getpostman.com/) to test backend routes
 
 The database for the assignment is located in `./backend/database` and is called `database.db`
-- it runs on SQLite(https://www.sqlite.org/index.html)
+- it runs on [SQLite](https://www.sqlite.org/index.html)
 
 You can download a local copy of this repo by downloading it directly from the repo or by using:
   ```
