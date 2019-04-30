@@ -13,6 +13,7 @@ async function fetchShowsList() {
   try {
     const dbCall = await fetch(endpoint);
     const data = await dbCall.clone().json();
+    // console.log(data);
     this.setState((prevState)=> {
       return Object.assign({}, prevState, {
         requestStatus: SUCCESS,

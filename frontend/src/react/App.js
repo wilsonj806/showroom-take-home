@@ -7,7 +7,7 @@ import { NavBar, Message } from './components/component.lib';
 import { Landing } from './layouts/Landing';
 import { Users } from './layouts/Users';
 import { UserProfile } from './layouts/UserProfile/UserProfile';
-import { Shows } from './layouts/Shows';
+import { Shows } from './layouts/Shows/Shows';
 import { Login } from './layouts/Login';
 import { Register } from './layouts/Register';
 import { PostShow } from './layouts/PostShow';

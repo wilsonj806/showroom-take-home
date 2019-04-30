@@ -14,11 +14,14 @@ Most of the things that are incomplete are on the frontend. The reason is becaus
 
 There was time spent trying to understand how to route backend requests and then time spent changing routes around. As a result, the backend routes look relatively clean now, but I probably lost a non-negligible amount of time.
 
+The above is reflected in the rough look of the whole app even with Bootstrap.
+
 The stuff that's incomplete includes the below:
 - Individual profile for shows
 - Full implementation of the shows list
 - Post comment form for the show profile
 - Responsive page
+- Proper styling and layouts
 
 ## Things Completed
 
@@ -49,3 +52,4 @@ Below are things that need fixing or improvement that I didn't have time to get 
 - use more JOINs in Sequelize syntax
   - it'd cut down on the number of database calls needed
 - make the page responsive for tablets and up
+- Scripting to automate the capitalization of relevant text

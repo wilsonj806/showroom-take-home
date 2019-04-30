@@ -22,13 +22,13 @@ const router = express.Router();
 /**
  * Middleware functions
  */
-const { getAllShowsAndSort, getUsers } = middleware;
+const { getAllShowsAndSort } = middleware;
 
 
 /**
  * GET all DISTINCT shows
  */
-router.get('/', getAllShowsAndSort, getUsers);
+router.get('/', getAllShowsAndSort);
 
 /**
  * GET all shows for a genre and for all users
