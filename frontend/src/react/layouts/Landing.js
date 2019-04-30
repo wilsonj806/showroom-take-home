@@ -48,11 +48,12 @@ class Landing extends Component {
 
 const style = {
   width: '33vw',
-  height: '20rem'
+  height: '20rem',
+  padding: '1rem'
 }
 
 Landing.propTypes = {
-  loggedInAs: PropTypes.string
+  loggedInAs: PropTypes.object
 }
 
 export { Landing }

@@ -1,4 +1,3 @@
-
 /**
  * Presentational Components
  */
@@ -14,3 +13,9 @@ export { Card } from "./presentational/Card";
  * Hybrid Components
  */
 export { NavBar } from "./hybrid/NavBar/NavBar";
+
+/**
+ * Container Components
+ */
+
+export { Message } from "./container/Message";

@@ -34,7 +34,7 @@ router.post('/login', async (req, res) => {
       }).send();
     } else {
       console.log(queryUsers.dataValues);
-      res.status(200).json({msg: 'Login Successful', id: queryUsers.dataValues.id}).send();
+      res.status(200).json({status: 200, msg: 'Login Successful', id: queryUsers.dataValues.id});
     }
   } catch(error) {
     res.status(500).send();
@@ -71,18 +71,18 @@ router.post('/register', async (req, res) => {
       }
     });
     if(queryUsers.length === 0) {
-      await User.create({ username: username });
-        /**
-         * TODO: change this to a flash message
-         * TODO: add proper 201 response headers if possible
-         */
-      console.log("Registration success");
-      res.status(200).send();
+      const response = await User.create({ username: username });
+      res.status(200).json({
+        status: 200,
+        msg: "Registration success",
+        id: response.dataValues.id,
+        username: username
+      });
     } else {
-      // TODO flesh this out more
       res.status(409).json({
+        status: 409,
         msg: `409 Error, username: ${username} already exists`
-      }).send();
+      });
     }
   } catch(error) {
     res.status(500).send();

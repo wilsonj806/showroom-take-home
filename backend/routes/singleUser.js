@@ -22,7 +22,7 @@ const middleware = require('./middleware/singleUserMiddleware');
 const { body, validationResult } = require('express-validator/check');
 
 
-const { getShowsForSingleUser, getSingleUser } = middleware;
+const { getShowsForSingleUser, getSingleUser, dbValidator } = middleware;
 
 const router = express.Router();
 
@@ -51,34 +51,43 @@ router.get('/post', async (req, res) => {
 /**
  * POST new show that a user is watching
  */
-router.post('/post', [
+router.post('/post/:id', [
   body('title', 'Title must not be empty').exists({checkFalsy: true}),
   body('img_url', 'Image URL must not be empty').exists({checkFalsy: true}),
   body('user_id', 'User id must not be empty').exists({checkFalsy: true}),
-  body('genre_id', 'Genre must not be empty').exists({checkFalsy: true})
-], async (req, res) => {
+  body('genre_id', 'Genre must not be empty').exists({checkFalsy: true}),
+], dbValidator, async (req, res) => {
   /**
    * NOTE: user_id should be surmised from hidden form inputs
    * TODO: make sure this can accept form data
    * TODO: add validation to make sure that an entry for that show doesn't exist already
    */
   let errors = validationResult(req);
-  const { user_id, genre_id, title, img_url  } = req.body;
+  const { genre_id, title, img_url  } = req.body;
+  console.log(req.body);
   try {
     if (!errors.isEmpty()) {
       res.status(400).json({
-        errors: errors.mapped()
-      }).send();
+        msg: errors.mapped()
+      });
+    } else if (res.locals.dbValidate.length !== 0) {
+      res.json({
+        msg: {status: 409,
+        msg: `Post failed, user already has show with title: ${title} in their profile`}
+      });
     } else {
       await Show.create({
-        user_id: user_id,
+        user_id: req.params.id,
         genre_id: genre_id,
         title: title,
         img_url: img_url
       });
       res.status(200).json({
-        msg: `Success, show added. ${title} added to the profile of user with id: ${user_id}`,
-      }).send();
+        msg: {
+          msg:`Success, show added. ${title} added to user`,
+          status: 200
+        },
+      });
     }
   } catch(error) {
     console.log(error);
@@ -89,6 +98,6 @@ router.post('/post', [
 /**
  * GET single user profile
  */
-router.get('/search/:id', getSingleUser, getShowsForSingleUser);
+router.get('/:id', getSingleUser, getShowsForSingleUser);
 
 module.exports = router;

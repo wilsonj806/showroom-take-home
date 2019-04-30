@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { List, Heading, Img } from '../components/component.lib';
+import { SHOWS } from '../../stateFn/stateCommon';
 
 
 class Shows extends Component {
   componentDidMount = () => {
-    this.props.fetchShowsFn();
+    if (this.props.showsList.length === 0) {
+      this.props.fetchShowsFn();
+    }
+    this.props.updateLocation(SHOWS);
   }
 
   mapShowsList = () => {

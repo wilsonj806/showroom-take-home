@@ -9,9 +9,9 @@ import PropTypes from 'prop-types';
 import './layouts.css';
 // TODO: maybe add a user and show count
 
-import { LOGIN } from '../../stateFn/stateCommon';
+import { REGISTER } from '../../stateFn/stateCommon';
 
-class Login extends Component {
+class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,7 +20,7 @@ class Login extends Component {
     this.userNameRef = React.createRef();
   }
   componentDidMount = () => {
-    this.props.updateLocation(LOGIN);
+    this.props.updateLocation(REGISTER);
   }
 
   componentWillUnmount = () => {
@@ -29,7 +29,7 @@ class Login extends Component {
   }
   onSubmitFn = (event) => {
     event.preventDefault();
-    this.props.queryLoginFn(this.state.username);
+    this.props.queryRegisterFn(this.state.username);
     this.setState({username: ''});
     this.userNameRef.current.value = '';
   }
@@ -52,12 +52,12 @@ class Login extends Component {
           <Heading
             className='text-center h1'
             headingType={1}
-            innerText='Log In'
+            innerText='Register'
           />
           <Paragraph
             className='lead text-center'
           >
-            Log in to the application here!
+            Register as a new user here!
           </Paragraph>
 
           <form
@@ -83,9 +83,9 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
+Register.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
-  queryLoginFn: PropTypes.func.isRequired
+  queryRegisterFn: PropTypes.func.isRequired
 }
 
-export { Login }
+export { Register }

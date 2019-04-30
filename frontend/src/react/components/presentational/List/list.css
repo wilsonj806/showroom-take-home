@@ -1,3 +1,25 @@
 .list--shows {
-  width: 20rem;
+  list-style: none;
+  width: 100%;
+  padding: 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list--shows > .list__item {
+  width: 47%;
+  margin: 3rem 0;
+  height: 15rem;
+  display: inline-block;
+}
+
+.list--users {
+  list-style: none;
+  padding: 0;
+}
+
+.list__item--sm {
+  padding: 0.5rem 0.5rem;
 }

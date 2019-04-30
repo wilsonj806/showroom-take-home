@@ -1,3 +1,7 @@
+.route-ctr{
+  height: calc(100vh - 2.75rem);
+}
+
 .single-card {
   width: 100vw;
   min-height: 100vh;
@@ -6,7 +10,7 @@
   align-items: center;
 }
 
-.login__card {
+.single-field__card {
   width: 27%;
   height: 30rem;
   display: flex;
@@ -15,10 +19,33 @@
   align-items: center;
 }
 
-.login__card > * {
+.post-show {
+  width: 27%;
+  height: 30rem;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.single-field__card > * {
   margin: 1rem 0;
 }
 
-.form--login {
+.form--single-field {
   width: 70%;
+}
+
+.form--post-show {
+  width: 70%;
+  height: 30rem;
+}
+
+.single-column {
+  width: 100vw;
+  min-height: 100%;
+}
+
+.article {
+  
 }

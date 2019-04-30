@@ -16,7 +16,7 @@ const ListItem = (props) => {
 
 ListItem.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node
 };
 
 export { ListItem }
