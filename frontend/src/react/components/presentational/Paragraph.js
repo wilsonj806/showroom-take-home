@@ -16,7 +16,7 @@ const Paragraph = (props) => {
 Paragraph.propTypes = {
   style: PropTypes.object,
   className: PropTypes.string,
-  children: PropTypes.oneOfType([PropTypes.string]).isRequired
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired
 };
 
 export { Paragraph }

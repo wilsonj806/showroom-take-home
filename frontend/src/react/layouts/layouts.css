@@ -10,6 +10,19 @@
   align-items: center;
 }
 
+.card--simple {
+  width: 27%;
+  height: 30rem;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.card--simple > *:first-child {
+  margin: 1rem 0;
+}
+
 .single-field__card {
   width: 27%;
   height: 30rem;
@@ -44,8 +57,4 @@
 .single-column {
   width: 100vw;
   min-height: 100%;
-}
-
-.article {
-  
 }
