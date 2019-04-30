@@ -1,20 +1,22 @@
 const Show = require('../../models/show');
 const User = require('../../models/user');
+const Genre = require('../../models/genre');
 
 
 const getAllShowsAndSort = async (req, res, next) => {
   // TODO: shrink this down if possible
   try {
-    const queryShows = await Show.findAll();
+    const queryShows = await Show.findAll({include: [{model: Genre}, {model: User}]});
 
     const reduced = queryShows.reduce((acc, show, i) => {
-      const { id, title, img_url, genre_id, user_id } = show.dataValues;
+      const { id, title, img_url, genre, user } = show.dataValues;
       const showObj = {
         ids: [],
         users_watching: [],
         title: title,
         img_url: img_url,
-        genre_id: genre_id,
+        genre_id: genre.dataValues.id,
+        genre_name: genre.dataValues.genre_name,
         has_repeats: false
       };
 
@@ -23,36 +25,21 @@ const getAllShowsAndSort = async (req, res, next) => {
         const indexExisting = acc.findIndex((accShow) =>{
             return accShow.title === title;
         });
-        acc[indexExisting].users_watching.push(user_id);
+        acc[indexExisting].users_watching.push(user.dataValues);
         acc[indexExisting].ids.push(id);
         acc[indexExisting].has_repeats = true;
         return acc;
       } else {
-        showObj.users_watching.push(user_id);
+        showObj.users_watching.push(user.dataValues);
         showObj.ids.push(id);
         acc.push(showObj);
         return acc;
       }
       }, []);
-    res.locals.distinctShows = reduced;
-  } catch(error) {
-    res.status(500).send();
-  }
-  next();
-}
-
-const getUsers = async (req, res, next) => {
-  try {
-    const queryUsers = await User.findAll();
-    const users = queryUsers.map(user => {
-      return {
-        id: user.dataValues.id,
-        username: user.dataValues.username
-      }});
-    res.json({
-      shows: res.locals.distinctShows,
-      users: users
-    });
+      console.log('hi');
+      res.json({
+        shows: reduced,
+      });
   } catch(error) {
     res.status(500).send();
   }
@@ -61,5 +48,4 @@ const getUsers = async (req, res, next) => {
 
 module.exports = {
   getAllShowsAndSort,
-  getUsers
 }

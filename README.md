@@ -43,6 +43,21 @@ To install the packages you'll need use the following:
   ```
 This will install the packages required in **both** the root directory and by the `./frontend` directory
 
+### Run The App
+
+To run the app, you'll be using the following command:
+```
+  npm run dev
+```
+Alternatively you can run the below if you want to use two separat terminals:
+```
+  npm run server
+
+  npm run frontend
+```
+
+This should open the frontend/ the webapp on PORT 3000 and start a server on PORT 5000.
+
 ### Missing Database?
 
 If the `./backend/database/database.db` file is unreadable by SQLite or missing, you'll need to make a new `database.db` file in to replace it.

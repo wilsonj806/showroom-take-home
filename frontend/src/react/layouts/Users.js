@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import { List, Heading, Img, Button, Card, Paragraph } from '../components/component.lib';
+import { List, Heading, Card, Paragraph } from '../components/component.lib';
 
 import { USERS } from '../../stateFn/stateCommon';
 
@@ -39,8 +39,8 @@ class Users extends Component {
     const { loggedInAs } = this.props;
     const isLoggedIn =  loggedInAs ? (
       <Heading
-        headingType={3}
-        className='h3'
+        headingType={4}
+        className='h4'
         style={{margin:'0px', padding: '0.75rem'}}
       >
         Logged in as:
@@ -76,12 +76,6 @@ class Users extends Component {
 }
 
 const cardStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center'
-};
-
-const loginStyle = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center'

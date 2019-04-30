@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import { List, Heading, Img, Card, Paragraph, Button } from '../../components/component.lib';
+import { List, Heading, Img, Card, Paragraph } from '../../components/component.lib';
 
 import './UserProfile.css';
 

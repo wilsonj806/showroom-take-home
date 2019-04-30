@@ -14,7 +14,7 @@ class Landing extends Component {
   }
 
   render = () => {
-    const text = 'Welcome to the TV Show WatchList App!';
+    const text = 'Welcome to the TV Show WatchList App! This app lets you add shows and see what other shows users have been watching.';
     const { loggedInAs } = this.props;
     const loginWelcome = loggedInAs ? `Logged in as ${loggedInAs.username}` : `Currently not logged in`;
     return(
@@ -22,8 +22,7 @@ class Landing extends Component {
         className='single-card'
       >
         <Card
-          className='card'
-          style={style}
+          className='card card--simple'
         >
           <Heading
             className='text-center h1'
@@ -32,6 +31,7 @@ class Landing extends Component {
           />
           <Paragraph
             className="lead"
+            style={{width: '80%'}}
           >
             {text}
           </Paragraph>
@@ -44,12 +44,6 @@ class Landing extends Component {
       </section>
     )
   }
-}
-
-const style = {
-  width: '33vw',
-  height: '20rem',
-  padding: '1rem'
 }
 
 Landing.propTypes = {

@@ -7,7 +7,7 @@ import { NavBar, Message } from './components/component.lib';
 import { Landing } from './layouts/Landing';
 import { Users } from './layouts/Users';
 import { UserProfile } from './layouts/UserProfile/UserProfile';
-import { Shows } from './layouts/Shows';
+import { Shows } from './layouts/Shows/Shows';
 import { Login } from './layouts/Login';
 import { Register } from './layouts/Register';
 import { PostShow } from './layouts/PostShow';
@@ -71,6 +71,7 @@ export class App extends Component {
             msg={this.state.msg}
             resetMsgFn={resetMsg.bind(this)}
           />
+
           <Route exact path="/" render={(props) => (
             <Landing
               {...props}
@@ -78,6 +79,7 @@ export class App extends Component {
               loggedInAs={isLoggedIn === true ? loggedInAs : null}
             />
           )} />
+
           <Route path="/users" exact render={(props) => (
             <Users
               {...props}
@@ -87,6 +89,7 @@ export class App extends Component {
               fetchUsersFn={fetchUsersList.bind(this)}
             />
           )} />
+
           <Route path="/shows" exact render={(props) => (
             <Shows
               {...props}
@@ -95,6 +98,7 @@ export class App extends Component {
               fetchShowsFn={fetchShowsList.bind(this)}
             />
           )} />
+
           <Route path="/users/login" render={(props) => (
             <Login
               {...props}
@@ -103,6 +107,7 @@ export class App extends Component {
               queryLoginFn={queryLogin.bind(this)}
             />
           )} />
+
           <Route path="/users/register" render={(props) => (
             <Register
               {...props}
@@ -111,6 +116,7 @@ export class App extends Component {
               queryRegisterFn={queryRegister.bind(this)}
             />
           )} />
+
           <Route path="/user/:id" exact={true} render={(props) => (
             <UserProfile
               {...props}
@@ -121,6 +127,7 @@ export class App extends Component {
               userProfile={this.state.userProfileToShow}
             />
           )} />
+
           <Route path="/user/post/:id" exact={true} render={(props) => (
             <PostShow
               {...props}
