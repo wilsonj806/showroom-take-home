@@ -36,7 +36,8 @@ class UserProfile extends Component {
     if (this.props.userProfile == null) return null;
     const { loggedInAs } = this.props;
     const { shows, user } = this.props.userProfile;
-    const map = shows.map((show) => {
+    console.log(this.props.userProfile);
+    const showsList = (shows) ? shows.map((show) => {
       const { genre_id, id, img_url, title} = show;
       return (
         <Card
@@ -55,7 +56,13 @@ class UserProfile extends Component {
           <Img style={thumbnailStyle} src={img_url} alt={`Show image for ${id}`}/>
         </Card>
       )
-    });
+    }) : (
+      <Paragraph
+        className='lead'
+      >
+        User has no shows
+      </Paragraph>
+    );
     const { id, username } = user;
     const primHeading = (
       <Heading
@@ -66,7 +73,7 @@ class UserProfile extends Component {
     const postShow = (loggedInAs !== null && loggedInAs.username === username) ? (
       <Link to={`/user/post/${id}`} className='btn btn-primary'>Post New Show</Link>
     ) : null;
-    return [primHeading, map, postShow];
+    return [primHeading, showsList, postShow];
   }
 
   render = () => {

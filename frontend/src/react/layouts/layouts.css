@@ -19,12 +19,26 @@
   align-items: center;
 }
 
+.post-show {
+  width: 27%;
+  height: 30rem;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .single-field__card > * {
   margin: 1rem 0;
 }
 
 .form--single-field {
   width: 70%;
+}
+
+.form--post-show {
+  width: 70%;
+  height: 30rem;
 }
 
 .single-column {

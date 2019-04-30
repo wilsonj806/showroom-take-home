@@ -1,6 +1,7 @@
 const Show = require('../../models/show');
 const User = require('../../models/user');
 
+// TODO: Convert this to a INNER JOIN
 
 const getSingleUser = async (req, res, next) => {
   try {
@@ -8,7 +9,7 @@ const getSingleUser = async (req, res, next) => {
       where: {
         id: req.params.id
       }
-    }).catch(error=> {throw new Error(`${error}`)});
+    });
     if(queryUsers == null || queryUsers.length === 0) {
       // TODO flesh this out more
       res.json({
@@ -34,9 +35,9 @@ const getShowsForSingleUser = async (req, res, next) => {
       }
     });
     if(queryShows == null || queryShows.length === 0) {
-      res.status(404).json({
-        status2: 404,
-        msg2: `Error, user with id: ${req.params.id} not found`
+      res.json({
+        status: 200,
+        user: res.locals.user
       });
     } else {
       const shows = queryShows.map(show => {
@@ -60,7 +61,25 @@ const getShowsForSingleUser = async (req, res, next) => {
   return;
 }
 
+const dbValidator = async (req, res, next) => {
+  try {
+    const { title } = req.body;
+    const dbCall = await Show.findAll({
+      where: {
+        title: title,
+        user_id: req.params.id
+      }
+    });
+    res.locals.dbValidate = dbCall;
+  } catch (error) {
+    console.log(error);
+    res.status(500).send();
+  }
+  next();
+}
+
 module.exports = {
   getShowsForSingleUser,
-  getSingleUser
+  getSingleUser,
+  dbValidator
 }

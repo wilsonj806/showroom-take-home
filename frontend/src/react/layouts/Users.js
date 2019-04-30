@@ -13,7 +13,7 @@ class Users extends Component {
     }
     this.props.updateLocation(USERS);
   }
-
+  // TODO for convenience get this to return the number of shows also
   mapUsersList = () => {
     const { usersList } = this.props;
     return usersList.map((user, i ) => {
@@ -38,14 +38,16 @@ class Users extends Component {
   render = () => {
     const { loggedInAs } = this.props;
     const isLoggedIn =  loggedInAs ? (
-      <Paragraph
+      <Heading
+        headingType={3}
+        className='h3'
         style={{margin:'0px', padding: '0.75rem'}}
       >
         Logged in as:
         <Link to={`/user/${loggedInAs.id}`}>
           {` ${loggedInAs.username}`}
         </Link>
-      </Paragraph>
+      </Heading>
     ) : null;
     return(
       <section

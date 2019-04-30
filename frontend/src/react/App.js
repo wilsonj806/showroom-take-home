@@ -15,7 +15,7 @@ import { PostShow } from './layouts/PostShow';
 import { fetchUsersList, queryLogin, queryRegister, logoutOfProfile } from '../stateFn/stateUsers';
 import { fetchShowsList } from '../stateFn/stateShows';
 import { fetchSingleUsersProfile, disposeProfile } from '../stateFn/stateSingleUser';
-import { getGenres } from '../stateFn/statePostShow';
+import { getGenres, queryShows } from '../stateFn/statePostShow';
 
 import { IDLE, HOME, updateLocation, resetMsg } from '../stateFn/stateCommon';
 
@@ -57,7 +57,7 @@ export class App extends Component {
   render = () => {
     const { isLoggedIn, loggedInAs } = this.state
     return(
-      <>
+      <div onClick={()=> resetMsg.bind(this)()}>
         <NavBar
           id='nav'
           navClass='nav navbar-dark bg-primary'
@@ -129,12 +129,11 @@ export class App extends Component {
               isLoggedIn={this.state.isLoggedIn}
               loggedInAs={isLoggedIn === true ? loggedInAs : null}
               updateLocation={updateLocation.bind(this)}
-              fetchSingleUsersProfileFn={fetchSingleUsersProfile.bind(this)}
-              userProfile={this.state.userProfileToShow}
+              queryShowsFn={queryShows.bind(this)}
             />
           )} />
         </div>
-      </>
+      </div>
     )
   }
 }

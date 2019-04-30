@@ -28,12 +28,13 @@ function updateLocation(location) {
   this.setState({currentPage: location});
 }
 
-function resetMsg() {
-  window.setTimeout(() => {
+async function resetMsg() {
+  await window.setTimeout(() => {
     this.setState({
       msg: null
     });
-  }, 8000)
+  }, 8000);
+  return;
 }
 
 /**
